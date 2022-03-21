@@ -37,11 +37,15 @@ public class MainActivity extends AppCompatActivity {
         final Button thirteenthButton = findViewById(R.id.button13);
         final Button fourteenthButton = findViewById(R.id.button14);
         final Button fifteenthButton = findViewById(R.id.button15);
+        final Button nextBtn = (Button) findViewById(R.id.button11);
+        nextBtn.setEnabled(false);
         firstButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 firstButton.setBackgroundColor(getResources().getColor(R.color.purple_500));
+                firstButton.setTextColor(getApplication().getResources().getColor(R.color.white));
                 secondButton.setBackgroundColor(getResources().getColor(R.color.light_gray));
+                secondButton.setTextColor(getApplication().getResources().getColor(R.color.black));
                 symptom1 = true;
             }
         });
@@ -49,7 +53,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 secondButton.setBackgroundColor(getResources().getColor(R.color.purple_500));
+                secondButton.setTextColor(getApplication().getResources().getColor(R.color.white));
                 firstButton.setBackgroundColor(getResources().getColor(R.color.light_gray));
+                firstButton.setTextColor(getApplication().getResources().getColor(R.color.black));
                 symptom1 = false;
             }
         });
@@ -57,7 +63,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 thirdButton.setBackgroundColor(getResources().getColor(R.color.purple_500));
+                thirdButton.setTextColor(getApplication().getResources().getColor(R.color.white));
                 fourthButton.setBackgroundColor(getResources().getColor(R.color.light_gray));
+                fourthButton.setTextColor(getApplication().getResources().getColor(R.color.black));
                 symptom2 = true;
             }
         });
@@ -65,7 +73,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 fourthButton.setBackgroundColor(getResources().getColor(R.color.purple_500));
+                fourthButton.setTextColor(getApplication().getResources().getColor(R.color.white));
                 thirdButton.setBackgroundColor(getResources().getColor(R.color.light_gray));
+                thirdButton.setTextColor(getApplication().getResources().getColor(R.color.black));
                 symptom2 = false;
             }
         });
@@ -73,7 +83,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 fifthButton.setBackgroundColor(getResources().getColor(R.color.purple_500));
+                fifthButton.setTextColor(getApplication().getResources().getColor(R.color.white));
                 sixthButton.setBackgroundColor(getResources().getColor(R.color.light_gray));
+                sixthButton.setTextColor(getApplication().getResources().getColor(R.color.black));
                 symptom3 = true;
             }
         });
@@ -81,7 +93,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 sixthButton.setBackgroundColor(getResources().getColor(R.color.purple_500));
+                sixthButton.setTextColor(getApplication().getResources().getColor(R.color.white));
                 fifthButton.setBackgroundColor(getResources().getColor(R.color.light_gray));
+                fifthButton.setTextColor(getApplication().getResources().getColor(R.color.black));
                 symptom3 = false;
             }
         });
@@ -89,7 +103,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 seventhButton.setBackgroundColor(getResources().getColor(R.color.purple_500));
+                seventhButton.setTextColor(getApplication().getResources().getColor(R.color.white));
                 eighthButton.setBackgroundColor(getResources().getColor(R.color.light_gray));
+                eighthButton.setTextColor(getApplication().getResources().getColor(R.color.black));
                 symptom4 = true;
             }
         });
@@ -97,7 +113,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 eighthButton.setBackgroundColor(getResources().getColor(R.color.purple_500));
+                eighthButton.setTextColor(getApplication().getResources().getColor(R.color.white));
                 seventhButton.setBackgroundColor(getResources().getColor(R.color.light_gray));
+                seventhButton.setTextColor(getApplication().getResources().getColor(R.color.black));
                 symptom4 = false;
             }
         });
@@ -105,7 +123,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 ninthButton.setBackgroundColor(getResources().getColor(R.color.purple_500));
+                ninthButton.setTextColor(getApplication().getResources().getColor(R.color.white));
                 tenthButton.setBackgroundColor(getResources().getColor(R.color.light_gray));
+                tenthButton.setTextColor(getApplication().getResources().getColor(R.color.black));
                 symptom5 = true;
             }
         });
@@ -113,7 +133,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 tenthButton.setBackgroundColor(getResources().getColor(R.color.purple_500));
+                tenthButton.setTextColor(getApplication().getResources().getColor(R.color.white));
                 ninthButton.setBackgroundColor(getResources().getColor(R.color.light_gray));
+                ninthButton.setTextColor(getApplication().getResources().getColor(R.color.black));
                 symptom5 = false;
             }
         });
@@ -121,7 +143,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 twelfthButton.setBackgroundColor(getResources().getColor(R.color.purple_500));
+                twelfthButton.setTextColor(getApplication().getResources().getColor(R.color.white));
                 thirteenthButton.setBackgroundColor(getResources().getColor(R.color.light_gray));
+                thirteenthButton.setTextColor(getApplication().getResources().getColor(R.color.black));
                 symptom6 = true;
             }
         });
@@ -129,7 +153,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 thirteenthButton.setBackgroundColor(getResources().getColor(R.color.purple_500));
+                thirteenthButton.setTextColor(getApplication().getResources().getColor(R.color.white));
                 twelfthButton.setBackgroundColor(getResources().getColor(R.color.light_gray));
+                twelfthButton.setTextColor(getApplication().getResources().getColor(R.color.black));
                 symptom6 = false;
             }
         });
@@ -137,7 +163,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 fourteenthButton.setBackgroundColor(getResources().getColor(R.color.purple_500));
+                fourteenthButton.setTextColor(getApplication().getResources().getColor(R.color.white));
                 fifteenthButton.setBackgroundColor(getResources().getColor(R.color.light_gray));
+                fifteenthButton.setTextColor(getApplication().getResources().getColor(R.color.black));
                 symptom7 = true;
             }
         });
@@ -145,7 +173,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 fifteenthButton.setBackgroundColor(getResources().getColor(R.color.purple_500));
+                fifteenthButton.setTextColor(getApplication().getResources().getColor(R.color.white));
                 fourteenthButton.setBackgroundColor(getResources().getColor(R.color.light_gray));
+                fourteenthButton.setTextColor(getApplication().getResources().getColor(R.color.black));
                 symptom7 = false;
             }
         });

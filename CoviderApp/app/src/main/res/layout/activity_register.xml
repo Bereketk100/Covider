@@ -19,35 +19,55 @@
         android:id="@+id/register_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="email"
         android:layout_below="@+id/text_register"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
-        />
+        android:hint="Email" />
+
+    <EditText
+        android:id="@+id/register_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/register_email"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:hint="Name" />
+    <EditText
+        android:id="@+id/register_username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/register_name"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:hint="Username" />
+
 
     <EditText
         android:id="@+id/register_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="password"
-        android:layout_below="@+id/register_email"
+        android:layout_below="@+id/register_username"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
-        />
+        android:hint="Password" />
 
     <Button
         android:id="@+id/register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/register_password"
-        android:text="Register"
-        android:layout_marginBottom="20dp"/>
+        android:layout_marginTop="22dp"
+        android:layout_marginBottom="20dp"
+        android:text="Register" />
 
     <TextView
         android:id="@+id/text_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/register"
-        android:text="Existing User Login"
+        android:layout_marginTop="150dp"
         android:layout_marginBottom="20dp"
-        android:textAlignment="center"/>
+        android:text="Existing User Login"
+        android:textAlignment="center" />
 
 </RelativeLayout>

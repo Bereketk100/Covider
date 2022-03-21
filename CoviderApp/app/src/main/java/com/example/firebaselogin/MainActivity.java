@@ -1,18 +1,21 @@
 package com.example.firebaselogin;
-import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.ktx.Firebase;
-import javax.security.auth.login.LoginException;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private Button btnLogout;
+    private FirebaseAnalytics analytics = FirebaseAnalytics.getInstance(this);
 
     @Override
 
@@ -26,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
 
             public void onClick(View v) {
-
                 logout();
 
             } }); }

@@ -6,10 +6,14 @@
         <entry key="..\:/Users/ezhan/source/repos/CS310/Project2.3/Covider/CoviderApp/app/src/main/res/layout/activity_login.xml" value="0.36" />
         <entry key="..\:/Users/ezhan/source/repos/CS310/Project2.3/Covider/CoviderApp/app/src/main/res/layout/activity_main.xml" value="0.268" />
         <entry key="..\:/Users/ezhan/source/repos/CS310/Project2.3/Covider/CoviderApp/app/src/main/res/layout/activity_register.xml" value="0.2" />
+<<<<<<< HEAD
         <entry key="app/src/main/res/drawable-anydpi/username.xml" value="0.204" />
         <entry key="app/src/main/res/drawable/border.xml" value="0.2345" />
         <entry key="app/src/main/res/font/.xml" value="0.28489583333333335" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.1" />
+=======
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.24048913043478262" />
+>>>>>>> 6528d274a3c2b6893914c560b615e3e722164d97
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.46466369628906257" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.24048913043478262" />
       </map>

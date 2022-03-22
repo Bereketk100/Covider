@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">health</string>
+    <string name="symptoms">Do you currently have any of the following symptoms?</string>
+    <string name="symptom1">Chills or Fever of 100 degrees or higher</string>
+    <string name="symptom2">Loss of Taste or Smell</string>
+    <string name="symptom3">Muscle Soreness or Headaches or Fatigue</string>
+    <string name="symptom4">Difficulty Breathing or Shortness of Breath</string>
+    <string name="symptom5">Cough or Runny Nose or Sore Throat or Congestion</string>
+    <string name="symptom6">Conjunctivitis (inflammation of eye including redness, itching and tearing) ALONG WITH feeling feverish</string>
+    <string name="symptom7">GI symptoms such as Abdominal Pain or Diarrhea or Nausea or Vomiting</string>
+    <string name="yes">YES</string>
+    <string name="no">NO</string>
+    <string name="next">Next</string>
 </resources>

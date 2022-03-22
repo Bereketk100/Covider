@@ -2,7 +2,11 @@
 <resources>
     <color name="red_200">#FFf44336</color>
     <color name="red_500">#FFE53935</color>
+<<<<<<< HEAD
     <color name="red">#DD0817</color>
+=======
+    <color name="red_700">#FFBA000D</color>
+>>>>>>> 6528d274a3c2b6893914c560b615e3e722164d97
     <color name="yellow_200">#FFffb300</color>
     <color name="yellow_700">#FFfb8c00</color>
     <color name="black">#FF000000</color>

@@ -31,7 +31,7 @@ public class RegisterActivity extends AppCompatActivity {
     public static final String PASSWORD_KEY = "password";
     public static final String TAG = "User";
     //document instance to save to firestore
-    private DocumentReference mDocRef = FirebaseFirestore.getInstance().document("data/users");
+    public static DocumentReference mDocRef = FirebaseFirestore.getInstance().document("data/users");
     private FirebaseAuth mAuth;
     private EditText email, name, username, password;
     private Button btnRegister;

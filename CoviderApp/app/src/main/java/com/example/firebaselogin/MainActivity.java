@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView mProfTextView;
     private Button btnLogout, btnprof;
     private FirebaseAnalytics analytics = FirebaseAnalytics.getInstance(this);
+    public static int numUsers = 1;
 
     @Override
 

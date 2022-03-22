@@ -71,7 +71,7 @@
         android:layout_alignParentEnd="true"
         android:layout_centerInParent="true"
         android:background="@drawable/border"
-        android:drawableLeft="@drawable/username"
+        android:drawableLeft="@drawable/email"
         android:fontFamily="@font/abel"
         android:hint="  Email"
         android:paddingLeft="10dp"

@@ -37,8 +37,6 @@ public class MainActivity extends AppCompatActivity {
         final Button thirteenthButton = findViewById(R.id.button13);
         final Button fourteenthButton = findViewById(R.id.button14);
         final Button fifteenthButton = findViewById(R.id.button15);
-        final Button nextBtn = (Button) findViewById(R.id.button11);
-        nextBtn.setEnabled(false);
         firstButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

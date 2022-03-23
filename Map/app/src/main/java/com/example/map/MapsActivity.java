@@ -54,8 +54,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         //get latlong for corners for specified place
-        LatLng one = new LatLng(34.0200, -118.2830);
-        LatLng two = new LatLng(34.0230, -118.2855);
+        LatLng one = new LatLng(34.02171266975199, -118.29074167058317);
+        LatLng two = new LatLng(34.02092529998721, -118.2796865021559);
 
         // CREATE A MARKER FOR EACH BUILDING
         initializeBuildings(mMap);

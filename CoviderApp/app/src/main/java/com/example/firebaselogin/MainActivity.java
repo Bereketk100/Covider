@@ -23,9 +23,10 @@ import com.google.firebase.firestore.QuerySnapshot;
 public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
-    private TextView mProfTextView;
     private Button btnLogout, btnprof;
     private FirebaseAnalytics analytics = FirebaseAnalytics.getInstance(this);
+
+    public static String mUsername;
     public static int numUsers = 1;
 
     @Override
@@ -33,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mProfTextView = (TextView) findViewById(R.id.profView);
         mAuth = FirebaseAuth.getInstance();
         btnLogout = findViewById(R.id.btnlogout);
         btnLogout.setOnClickListener(new View.OnClickListener() {
@@ -42,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
 
             public void onClick(View v) {
                 logout();
-
             }
 
         });
@@ -74,15 +73,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void fetchProf(){
-        mDocRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                if (documentSnapshot.exists()) {
-                    String nameText = documentSnapshot.getString(NAME_KEY);
-                    mProfTextView.setText("\"" + nameText + "\" -- " + nameText);
-                }
-            }
-        });
+        startActivity(new Intent(MainActivity.this, ProfileActivity.class));
         //maybe add onFailureListener
     }
 }

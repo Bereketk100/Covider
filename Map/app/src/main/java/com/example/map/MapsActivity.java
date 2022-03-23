@@ -157,5 +157,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         googleMap.addMarker(new MarkerOptions().position(zhs).title("Zumberge Hall of Science"));
         LatLng stu = new LatLng(34.020250184652944, -118.28565178083494);
         googleMap.addMarker(new MarkerOptions().position(stu).title("Student Union"));
+        LatLng adm = new LatLng(34.020947159208745, -118.2855621558506);
+        googleMap.addMarker(new MarkerOptions().position(adm).title("Bovard Administration Building"));
     }
 }

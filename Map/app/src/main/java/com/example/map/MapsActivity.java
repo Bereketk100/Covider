@@ -60,10 +60,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // CREATE A MARKER FOR EACH BUILDING
         initializeBuildings(mMap);
 
-        // LARGER VIEW
-        // LatLng one = new LatLng(34.0234396,-118.291267);
-        //  LatLng two = new LatLng(34.0195451, -118.2856951);
-
         LatLngBounds.Builder builder = new LatLngBounds.Builder();
 
         //add them to builder
@@ -76,8 +72,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         int width = getResources().getDisplayMetrics().widthPixels;
         int height = getResources().getDisplayMetrics().heightPixels;
 
-        // 20% padding
-        int padding = (int) (width * 0.20);
+        // 10% padding
+        int padding = (int) (width * 0.10);
 
         //set latlong bounds
         mMap.setLatLngBoundsForCameraTarget(bounds);
@@ -118,11 +114,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     public void initializeBuildings(GoogleMap googleMap) {
         LatLng leavyLibrary = new LatLng(34.0217, -118.2828);
-        googleMap.addMarker(new MarkerOptions().position(leavyLibrary).title("Leavy Library"));
+        googleMap.addMarker(new MarkerOptions().position(leavyLibrary).title("Leavey Library"));
         LatLng cpa = new LatLng(34.0213, -118.2840);
         googleMap.addMarker(new MarkerOptions().position(cpa).title("Center of International and Public Affairs "));
         LatLng doheny = new LatLng(34.0202, -118.2837);
-        googleMap.addMarker(new MarkerOptions().position(doheny).title("Doheny Library"));
+        googleMap.addMarker(new MarkerOptions().position(doheny).title("Doheny Memorial Library"));
         LatLng pe = new LatLng(34.0213, -118.2863);
         googleMap.addMarker(new MarkerOptions().position(pe).title("USC Physical Education Building"));
         LatLng bookstore = new LatLng(34.0206, -118.2865);
@@ -139,6 +135,27 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         googleMap.addMarker(new MarkerOptions().position(sgm).title("Seeley G. Mudd Building"));
         LatLng salCs = new LatLng(34.0195, -118.2891);
         googleMap.addMarker(new MarkerOptions().position(salCs).title("Salvatori Computer Science Center"));
-
+        LatLng lrc = new LatLng(34.024273982347424, -118.28844182109525);
+        googleMap.addMarker(new MarkerOptions().position(lrc).title("Lyon Center"));
+        LatLng uac = new LatLng(34.02398408084013, -118.28842171842793);
+        googleMap.addMarker(new MarkerOptions().position(uac).title("Uytengsu Aquatics Center"));
+        LatLng jmc = new LatLng(34.02312140286485, -118.28766483630059);
+        googleMap.addMarker(new MarkerOptions().position(jmc).title("John McKay Center"));
+        LatLng ann = new LatLng(34.020821731157426, -118.28709493391072);
+        googleMap.addMarker(new MarkerOptions().position(ann).title("Wallis Annenberg Hall"));
+        LatLng pks = new LatLng(34.018818984872325, -118.29094257950142);
+        googleMap.addMarker(new MarkerOptions().position(pks).title("Parkside Apartments"));
+        LatLng phe = new LatLng(34.019156078095335, -118.28885934798686);
+        googleMap.addMarker(new MarkerOptions().position(phe).title("Powell Hall"));
+        LatLng rth = new LatLng(34.020176235914825, -118.28991601586922);
+        googleMap.addMarker(new MarkerOptions().position(rth).title("Ronald Tutor Hall"));
+        LatLng fertit = new LatLng(34.01881439884232, -118.28240853143427);
+        googleMap.addMarker(new MarkerOptions().position(fertit).title("Fertitta Hall"));
+        LatLng leventhal = new LatLng(34.019151529654565, -118.28556969127716);
+        googleMap.addMarker(new MarkerOptions().position(leventhal).title("Leventhal School of Accounting"));
+        LatLng zhs = new LatLng(34.0192540898282, -118.28634846853177);
+        googleMap.addMarker(new MarkerOptions().position(zhs).title("Zumberge Hall of Science"));
+        LatLng stu = new LatLng(34.020250184652944, -118.28565178083494);
+        googleMap.addMarker(new MarkerOptions().position(stu).title("Student Union"));
     }
 }

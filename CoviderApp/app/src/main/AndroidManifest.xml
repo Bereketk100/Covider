@@ -10,13 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Firebaselogin">
         <activity
-            android:name="com.example.firebaselogin.RegisterActivity"
+            android:name=".ProfileActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.firebaselogin.LoginActivity"
+            android:name=".RegisterActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.firebaselogin.MainActivity"
+            android:name=".LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

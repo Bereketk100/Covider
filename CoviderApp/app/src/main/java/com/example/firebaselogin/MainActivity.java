@@ -2,6 +2,7 @@ package com.example.firebaselogin;
 
 import static com.example.firebaselogin.RegisterActivity.NAME_KEY;
 import static com.example.firebaselogin.RegisterActivity.mDocRef;
+import static com.example.firebaselogin.RegisterActivity.mUsers;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,20 +17,23 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
-    private TextView mProfTextView;
     private Button btnLogout, btnprof;
     private FirebaseAnalytics analytics = FirebaseAnalytics.getInstance(this);
+
+    public static String mUsername;
+    public static int numUsers = 1;
 
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mProfTextView = (TextView) findViewById(R.id.profView);
         mAuth = FirebaseAuth.getInstance();
         btnLogout = findViewById(R.id.btnlogout);
         btnLogout.setOnClickListener(new View.OnClickListener() {
@@ -38,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
 
             public void onClick(View v) {
                 logout();
-
             }
 
         });
@@ -68,16 +71,9 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(MainActivity.this, LoginActivity.class));
 
     }
+
     public void fetchProf(){
-        mDocRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                if (documentSnapshot.exists()) {
-                    String nameText = documentSnapshot.getString(NAME_KEY);
-                    mProfTextView.setText("\"" + nameText + "\" -- " + nameText);
-                }
-            }
-        });
+        startActivity(new Intent(MainActivity.this, ProfileActivity.class));
         //maybe add onFailureListener
     }
 }

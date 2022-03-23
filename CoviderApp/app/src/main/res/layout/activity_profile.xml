@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ProfileActivity">
+
+    <TextView
+        android:id="@+id/text_profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="16dp"
+        android:fontFamily="@font/alike"
+        android:gravity="center"
+        android:text="Profile Page"
+        android:textColor="@color/black"
+        android:textSize="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.213" />
+    <TextView
+        android:id="@+id/ProfileText"
+        android:layout_width="140dp"
+        android:layout_height="25dp"
+        android:text="Profile Page"
+        android:textAlignment="textStart"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display3"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="135dp"
+        tools:layout_editor_absoluteY="66dp" />
+
+    <TextView
+        android:id="@+id/nameView"
+        android:layout_width="196dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="56dp"
+        android:text="TextView"
+        app:layout_constraintTop_toBottomOf="@+id/displayInfo"
+        tools:layout_editor_absoluteX="107dp" />
+
+    <Button
+        android:id="@+id/homePage"
+        android:layout_width="182dp"
+        android:layout_height="67dp"
+        android:text="Home Page"
+        tools:layout_editor_absoluteX="114dp"
+        tools:layout_editor_absoluteY="473dp" />
+
+    <Button
+        android:id="@+id/displayInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="Button"
+        app:layout_constraintTop_toBottomOf="@+id/text_profile"
+        tools:layout_editor_absoluteX="158dp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

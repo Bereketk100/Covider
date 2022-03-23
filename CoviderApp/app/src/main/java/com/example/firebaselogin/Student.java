@@ -1,4 +1,10 @@
 package com.example.firebaselogin;
 
-public class Student {
+import java.util.Date;
+
+public class Student extends User {
+
+    Student (int userID, String email, String name, String username, String password){
+        super(userID, email, name, username, password);
+    }
 }

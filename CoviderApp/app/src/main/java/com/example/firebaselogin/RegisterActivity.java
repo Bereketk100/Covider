@@ -1,5 +1,7 @@
 package com.example.firebaselogin;
 
+import static com.example.firebaselogin.MainActivity.numUsers;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -18,6 +20,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -31,7 +34,9 @@ public class RegisterActivity extends AppCompatActivity {
     public static final String PASSWORD_KEY = "password";
     public static final String TAG = "User";
     //document instance to save to firestore
-    public static DocumentReference mDocRef = FirebaseFirestore.getInstance().document("data/users");
+    private static FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
+    public static CollectionReference mUsers = mFirestore.collection("users");
+    public static DocumentReference mDocRef;
     private FirebaseAuth mAuth;
     private EditText email, name, username, password;
     private Button btnRegister;
@@ -42,13 +47,12 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
         mAuth = FirebaseAuth.getInstance();
         email = findViewById(R.id.register_email);
-
         password = findViewById(R.id.register_password);
         name = findViewById(R.id.register_name);
         username = findViewById(R.id.register_username);
-
         btnRegister  = findViewById(R.id.register);
         textLogin = findViewById(R.id.text_login);
+        numUsers++;
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,13 +104,9 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             });
             //add username, password, name to firestore user doc
-            Map<String, Object> dataToSave = new HashMap<String, Object>();
-            dataToSave.put(EMAIL_KEY, emailTxt);
-            dataToSave.put(NAME_KEY, nameTxt);
-            dataToSave.put(USERNAME_KEY, usernameTxt);
-            dataToSave.put(PASSWORD_KEY, passTxt);
+            Student student = new Student(numUsers, emailTxt, nameTxt, usernameTxt, passTxt);
 
-            mDocRef.set(dataToSave).addOnSuccessListener(new OnSuccessListener<Void>() {
+            mUsers.document(usernameTxt).set(student).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void unused) {
                     Log.d(TAG, "Document has been saved!");
@@ -117,7 +117,7 @@ public class RegisterActivity extends AppCompatActivity {
                     Log.w(TAG, "Document was not saved", e);
                 }
             });
-            
+            mDocRef = mFirestore.document("users/" + usernameTxt);
         }
     }
 }

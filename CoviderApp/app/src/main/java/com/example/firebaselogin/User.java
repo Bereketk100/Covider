@@ -1,5 +1,6 @@
 package com.example.firebaselogin;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -9,7 +10,18 @@ public abstract class User {
     private Status status;
     private Date registerDate;
     private List<TestRecord> testRecords;
+    //constructor
+    User (int userID_, String email_, String name_, String username_, String password_){
+        userID = userID_;
+        email = email_;
+        name = name_;
+        username = username_;
+        password = password_;
 
+        registerDate = new Date();
+        status = Status.Healthy;
+        testRecords = new ArrayList<>();
+    }
     //getters/setters
     public int getUserID() {
         return userID;

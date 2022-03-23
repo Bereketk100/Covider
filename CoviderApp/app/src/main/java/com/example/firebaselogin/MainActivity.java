@@ -2,6 +2,7 @@ package com.example.firebaselogin;
 
 import static com.example.firebaselogin.RegisterActivity.NAME_KEY;
 import static com.example.firebaselogin.RegisterActivity.mDocRef;
+import static com.example.firebaselogin.RegisterActivity.mUsers;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +17,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -69,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(MainActivity.this, LoginActivity.class));
 
     }
+
     public void fetchProf(){
         mDocRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override

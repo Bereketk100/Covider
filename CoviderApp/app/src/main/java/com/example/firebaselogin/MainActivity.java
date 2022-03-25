@@ -1,8 +1,6 @@
 package com.example.firebaselogin;
 
 import static com.example.firebaselogin.RegisterActivity.NAME_KEY;
-import static com.example.firebaselogin.RegisterActivity.mDocRef;
-import static com.example.firebaselogin.RegisterActivity.mUsers;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,7 +14,10 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -26,7 +27,10 @@ public class MainActivity extends AppCompatActivity {
     private Button btnLogout, btnprof;
     private FirebaseAnalytics analytics = FirebaseAnalytics.getInstance(this);
 
-    public static String mUsername;
+    public static FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
+    public static CollectionReference mUsers = mFirestore.collection("users");
+    public static DocumentReference mUserDocRef;
+    public static User thisUser;
     public static int numUsers = 1;
 
     @Override
@@ -35,6 +39,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mAuth = FirebaseAuth.getInstance();
+        String emailTxt = mAuth.getCurrentUser().getEmail();
+        mUserDocRef = mUsers.document(emailTxt);
+        mUserDocRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                Student student = documentSnapshot.toObject(Student.class);
+                thisUser = student;
+            }
+        });
         btnLogout = findViewById(R.id.btnlogout);
         btnLogout.setOnClickListener(new View.OnClickListener() {
 

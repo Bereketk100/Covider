@@ -9,11 +9,19 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
+
+import static com.example.firebaselogin.MainActivity.mFirestore;
+import static com.example.firebaselogin.MainActivity.mUserDocRef;
+import static com.example.firebaselogin.MainActivity.mUsers;
+import static com.example.firebaselogin.MainActivity.thisUser;
 
 public class LoginActivity extends AppCompatActivity {
+
     private FirebaseAuth mAuth;
     private EditText email, password;
     private Button btnLogin;
@@ -58,6 +66,7 @@ public class LoginActivity extends AppCompatActivity {
                     if(task.isSuccessful())
                     {
                         Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                        mUserDocRef = mFirestore.document("users/" + user);
                         startActivity(new Intent(LoginActivity.this , MainActivity.class));
                     }
                     else

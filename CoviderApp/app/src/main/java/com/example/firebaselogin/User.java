@@ -10,7 +10,9 @@ public abstract class User {
     private Status status;
     private Date registerDate;
     private List<TestRecord> testRecords;
-    //constructor
+    //constructors
+    User (){
+    }
     User (int userID_, String email_, String name_, String username_, String password_){
         userID = userID_;
         email = email_;

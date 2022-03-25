@@ -1,9 +1,12 @@
 package com.example.firebaselogin;
 
 import static android.content.ContentValues.TAG;
-import static com.example.firebaselogin.MainActivity.mUsername;
+import static com.example.firebaselogin.MainActivity.thisUser;
 import static com.example.firebaselogin.RegisterActivity.NAME_KEY;
-
+import static com.example.firebaselogin.MainActivity.mUsers;
+import static com.example.firebaselogin.MainActivity.numUsers;
+import static com.example.firebaselogin.MainActivity.mFirestore;
+import static com.example.firebaselogin.MainActivity.mUserDocRef;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -33,8 +36,10 @@ public class ProfileActivity extends AppCompatActivity {
         mNameView = (TextView) findViewById(R.id.nameView);
         btnHome = findViewById(R.id.homePage);
         btnDisplay = findViewById(R.id.displayInfo);
-        DocumentReference docRef = mFirestore.collection("users").document(mUsername);
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        String nameText = thisUser.getName();
+        mNameView.setText("\"" + nameText + "\" -- " + nameText);
+        /*
+        mUserDocRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
@@ -50,7 +55,8 @@ public class ProfileActivity extends AppCompatActivity {
                     Log.d(TAG, "get failed with ", task.getException());
                 }
             }
-        });
+        });*/
+        //displayInfo();
         btnHome.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -72,21 +78,14 @@ public class ProfileActivity extends AppCompatActivity {
         });*/
     }
     public void displayInfo(){
-        /*
-        mDocRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+        mUserDocRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                if (documentSnapshot.exists()) {
-                    String nameText = documentSnapshot.getString(NAME_KEY);
-                    mNameView.setText("\"" + nameText + "\" -- " + nameText);
-                }
+                Student student = documentSnapshot.toObject(Student.class);
+                String nameText = student.getName();
+                mNameView.setText("\"" + nameText + "\" -- " + nameText);
             }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.w(TAG, "Name was not fetched", e);
-            }
-        });*/
+        });
 
     }
 

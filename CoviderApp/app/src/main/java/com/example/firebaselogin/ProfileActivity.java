@@ -26,39 +26,17 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class ProfileActivity extends AppCompatActivity {
-    private Button btnHome, btnDisplay;
+    private Button btnHome, btnAddTest;
     private static FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
-    private TextView mNameView, mEmailView, mUserView, mPassView;
+    private TextView mNameView, mEmailView, mUserView, mPassView, mStatusView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        mNameView = (TextView) findViewById(R.id.nameView);
+        setViews();
+        displayInfo();
         btnHome = findViewById(R.id.homePage);
-        btnDisplay = findViewById(R.id.displayInfo);
-        String nameText = thisUser.getName();
-        mNameView.setText("\"" + nameText + "\" -- " + nameText);
-        /*
-        mUserDocRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                        Log.d(TAG, "DocumentSnapshot data: " + document.getData());
-                        String nameText = document.getString(NAME_KEY);
-                        mNameView.setText("\"" + nameText + "\" -- " + nameText);
-                    } else {
-                        Log.d(TAG, "No such document");
-                    }
-                } else {
-                    Log.d(TAG, "get failed with ", task.getException());
-                }
-            }
-        });*/
-        //displayInfo();
         btnHome.setOnClickListener(new View.OnClickListener() {
-
             @Override
 
             public void onClick(View v) {
@@ -66,27 +44,26 @@ public class ProfileActivity extends AppCompatActivity {
             }
 
         });
-        /*
-        btnDisplay.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-
-            public void onClick(View v) {
-                //displayInfo();
-            }
-
-        });*/
     }
-    public void displayInfo(){
-        mUserDocRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                Student student = documentSnapshot.toObject(Student.class);
-                String nameText = student.getName();
-                mNameView.setText("\"" + nameText + "\" -- " + nameText);
-            }
-        });
+    public void setViews(){
+        mNameView = (TextView) findViewById(R.id.nameView);
+        mEmailView = (TextView) findViewById(R.id.emailView);
+        mUserView = (TextView) findViewById(R.id.userView);
+        mPassView = (TextView) findViewById(R.id.passView);
+        mStatusView = (TextView) findViewById(R.id.statusView);
+    }
 
+    public void displayInfo(){
+        String nameText = thisUser.getName();
+        mNameView.setText("Name: " + nameText);
+        String emailText = thisUser.getEmail();
+        mEmailView.setText("Email: " + emailText);
+        String statText = thisUser.getStatus().toString();
+        mStatusView.setText("Status: " + statText);
+        String userText = thisUser.getUsername();
+        mUserView.setText("Username: " + userText);
+        String passText = thisUser.getPassword();
+        mPassView.setText("Password: " + passText);
     }
 
     public void returnHome(){

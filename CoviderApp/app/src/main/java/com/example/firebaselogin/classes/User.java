@@ -1,4 +1,4 @@
-package com.example.firebaselogin;
+package com.example.firebaselogin.classes;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -9,7 +9,7 @@ public abstract class User {
     private String email, name, username, password;
     private Status status;
     private Date registerDate;
-    private List<TestRecord> testRecords;
+    private List<Test> testRecords;
     //constructors
     User (){
     }

@@ -1,4 +1,4 @@
-package com.example.firebaselogin;
+package com.example.firebaselogin.classes;
 
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import com.example.firebaselogin.R;
 
 public class HealthForm extends AppCompatActivity {
     // USING SQLITE CREATE A DATABASE WITH A USER AND THEIR CURRENT HEALTH CONDITION

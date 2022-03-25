@@ -36,15 +36,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mAuth = FirebaseAuth.getInstance();
-        String emailTxt = mAuth.getCurrentUser().getEmail();
-        mUserDocRef = mUsers.document(emailTxt);
-        mUserDocRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                Student student = documentSnapshot.toObject(Student.class);
-                thisUser = student;
-            }
-        });
+        if (mAuth.getCurrentUser() != null){
+            String emailTxt = mAuth.getCurrentUser().getEmail();
+            mUserDocRef = mUsers.document(emailTxt);
+            mUserDocRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    Student student = documentSnapshot.toObject(Student.class);
+                    thisUser = student;
+                }
+            });
+        }
+
         btnLogout = findViewById(R.id.btnlogout);
         btnLogout.setOnClickListener(new View.OnClickListener() {
 

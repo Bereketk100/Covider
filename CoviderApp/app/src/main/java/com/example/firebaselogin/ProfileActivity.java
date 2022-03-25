@@ -1,28 +1,20 @@
 package com.example.firebaselogin;
 
-import static android.content.ContentValues.TAG;
 import static com.example.firebaselogin.MainActivity.thisUser;
-import static com.example.firebaselogin.RegisterActivity.NAME_KEY;
-import static com.example.firebaselogin.MainActivity.mUsers;
-import static com.example.firebaselogin.MainActivity.numUsers;
-import static com.example.firebaselogin.MainActivity.mFirestore;
-import static com.example.firebaselogin.MainActivity.mUserDocRef;
-import androidx.annotation.NonNull;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class ProfileActivity extends AppCompatActivity {
@@ -36,6 +28,17 @@ public class ProfileActivity extends AppCompatActivity {
         setViews();
         displayInfo();
         btnHome = findViewById(R.id.homePage);
+        btnAddTest = findViewById(R.id.btnAddTest);
+
+
+        btnAddTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onButtonShowPopupWindowClick(v);
+            }
+
+        });
+
         btnHome.setOnClickListener(new View.OnClickListener() {
             @Override
 
@@ -65,9 +68,39 @@ public class ProfileActivity extends AppCompatActivity {
         String passText = thisUser.getPassword();
         mPassView.setText("Password: " + passText);
     }
+    public void addTest(){
+
+    }
 
     public void returnHome(){
         startActivity(new Intent(ProfileActivity.this, MainActivity.class));
+    }
+
+    public void onButtonShowPopupWindowClick(View v) {
+
+        // inflate the layout of the popup window
+        LayoutInflater inflater = (LayoutInflater)
+                getSystemService(LAYOUT_INFLATER_SERVICE);
+        View popupView = inflater.inflate(R.layout.test_popup, null);
+
+        // create the popup window
+        int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+        boolean focusable = true; // lets taps outside the popup also dismiss it
+        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+
+        // show the popup window
+        // which view you pass in doesn't matter, it is only used for the window tolken
+        popupWindow.showAtLocation(v, Gravity.CENTER, 0, 0);
+
+        // dismiss the popup window when touched
+        popupView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                popupWindow.dismiss();
+                return true;
+            }
+        });
     }
 
 

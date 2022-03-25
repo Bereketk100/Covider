@@ -81,4 +81,10 @@ public abstract class User {
         this.registerDate = registerDate;
     }
 
+    //methods
+    public void userAddTest(){
+
+    }
+
+
 }

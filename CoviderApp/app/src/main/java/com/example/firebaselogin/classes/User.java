@@ -82,8 +82,8 @@ public abstract class User {
     }
 
     //methods
-    public void userAddTest(){
-
+    public void userAddTest(Test test){
+        testRecords.add(test);
     }
 
 

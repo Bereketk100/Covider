@@ -2,15 +2,56 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="#62def8">
 
     <TextView
+        android:id="@+id/header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_margin="30dp"
-        android:textSize="22sp"
-        android:text="This is a popup window."/>
+        android:text="Upload COVID Test"
+        android:textSize="22sp" />
+    <TextView
+        android:id="@+id/question"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/header"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="50dp"
+        android:text="Did you test positive?"
+        android:textSize="18sp"/>
+
+    <ImageButton
+        android:id="@+id/btnYes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/question"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="50dp"
+        android:text="Yes" />
+
+    <ImageButton
+        android:id="@+id/btnNo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnYes"
+        android:layout_marginTop="20dp"
+        android:text="No" />
+    <EditText
+        android:id="@+id/enterDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnNo"
+        android:layout_marginTop="20dp"
+        android:hint="Enter Date of Test (MM/DD/YYYY)"
+        />
+    <ImageButton
+        android:id="@+id/btnDone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/enterDate"
+        android:layout_marginTop="20dp"
+        android:text="Done" />
+
 
 </RelativeLayout>

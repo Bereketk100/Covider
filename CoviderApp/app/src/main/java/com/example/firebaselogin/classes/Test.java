@@ -6,9 +6,9 @@ public class Test {
     private Date date;
     private boolean result;
     //constructors
-    Test(){}
+    public Test(){}
 
-    Test (boolean result_, Date date_){
+    public Test (boolean result_, Date date_){
         result = result_;
         date = date_;
     }

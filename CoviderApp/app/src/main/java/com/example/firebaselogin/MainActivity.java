@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mAuth = FirebaseAuth.getInstance();
-        if (mAuth.getCurrentUser() != null){
+        if (mAuth.getCurrentUser() == null || thisUser == null){
             String emailTxt = mAuth.getCurrentUser().getEmail();
             mUserDocRef = mUsers.document(emailTxt);
             mUserDocRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {

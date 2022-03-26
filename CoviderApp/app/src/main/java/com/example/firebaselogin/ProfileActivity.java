@@ -146,7 +146,7 @@ public class ProfileActivity extends AppCompatActivity {
         String[] sections = new String[3];
         sections = str.trim().split("/");
         int month = Integer.parseInt(sections[0]) - 1, day = Integer.parseInt(sections[1]),
-        year = Integer.parseInt(sections[2]);
+        year = Integer.parseInt(sections[2])- 1900;
         Date date = new Date(year, month, day);
         return date;
     }

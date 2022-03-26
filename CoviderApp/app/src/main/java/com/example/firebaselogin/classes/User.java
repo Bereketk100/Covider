@@ -1,5 +1,17 @@
 package com.example.firebaselogin.classes;
 
+import static android.content.ContentValues.TAG;
+import static com.example.firebaselogin.MainActivity.mFirestore;
+import static com.example.firebaselogin.MainActivity.mUsers;
+
+import android.util.Log;
+
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.CollectionReference;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -83,6 +95,20 @@ public abstract class User {
 
     //methods
     public void userAddTest(Test test){
+        //adding Firestore document to user subcollection testRecords
+
+        CollectionReference mRecords = mUsers.document(email).collection("testRecords");
+        mRecords.document(test.getDate().toString()).set(test).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                Log.d(TAG, "Document has been saved!"); }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.w(TAG, "Document was not saved", e);
+            }
+        });
+
         if (testRecords == null){
             testRecords = new ArrayList<>();
         }

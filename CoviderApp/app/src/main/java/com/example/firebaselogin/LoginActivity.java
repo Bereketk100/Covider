@@ -67,6 +67,7 @@ public class LoginActivity extends AppCompatActivity {
                 {
                     if(task.isSuccessful())
                     {
+                        //sets mUserDocRef and thisUser upon successful login
                         Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
                         mUserDocRef = mFirestore.document("users/" + user);
                         mUserDocRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {

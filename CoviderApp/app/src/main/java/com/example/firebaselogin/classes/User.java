@@ -83,6 +83,9 @@ public abstract class User {
 
     //methods
     public void userAddTest(Test test){
+        if (testRecords == null){
+            testRecords = new ArrayList<>();
+        }
         testRecords.add(test);
     }
 

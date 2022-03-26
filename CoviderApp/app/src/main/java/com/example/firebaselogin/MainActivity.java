@@ -36,17 +36,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mAuth = FirebaseAuth.getInstance();
-        if (mAuth.getCurrentUser() == null || thisUser == null){
-            String emailTxt = mAuth.getCurrentUser().getEmail();
-            mUserDocRef = mUsers.document(emailTxt);
-            mUserDocRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                @Override
-                public void onSuccess(DocumentSnapshot documentSnapshot) {
-                    Student student = documentSnapshot.toObject(Student.class);
-                    thisUser = student;
-                }
-            });
-        }
 
         btnLogout = findViewById(R.id.btnlogout);
         btnLogout.setOnClickListener(new View.OnClickListener() {
@@ -74,9 +63,22 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser==null)
-        { startActivity(new Intent(MainActivity.this, LoginActivity.class));
+        {
+            startActivity(new Intent(MainActivity.this, LoginActivity.class));
 
-        } }
+        }
+        else { //gets document snapshot of currentUser if someone is already logged in
+            String emailTxt = mAuth.getCurrentUser().getEmail();
+            mUserDocRef = mUsers.document(emailTxt);
+            mUserDocRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    Student student = documentSnapshot.toObject(Student.class);
+                    thisUser = student;
+                }
+            });
+        }
+    }
 
     public void logout() {
 

@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Firebaselogin">
         <activity
-            android:name=".classes.HealthForm"
+            android:name=".HealthFormActivity"
             android:exported="false" />
         <activity
             android:name=".ProfileActivity"

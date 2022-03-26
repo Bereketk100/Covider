@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     public static DocumentReference mUserDocRef;
     public static User thisUser;
     public static int numUsers = 1;
+    public static boolean healthAnswered;
 
     @Override
 
@@ -67,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(MainActivity.this, LoginActivity.class));
 
         }
-        else { //gets document snapshot of currentUser if someone is already logged in
+        else if (!healthAnswered) { //gets document snapshot of currentUser if someone is already logged in
             String emailTxt = mAuth.getCurrentUser().getEmail();
             mUserDocRef = mUsers.document(emailTxt);
             mUserDocRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -77,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
                     thisUser = student;
                 }
             });
+            startActivity(new Intent(MainActivity.this, HealthFormActivity.class));
         }
     }
 

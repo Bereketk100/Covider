@@ -92,10 +92,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void logout() {
-
         FirebaseAuth.getInstance().signOut();
         startActivity(new Intent(MainActivity.this, LoginActivity.class));
-
     }
 
     public void fetchProf(){

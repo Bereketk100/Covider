@@ -113,7 +113,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     public void initializeBuildings(GoogleMap googleMap) {
         USCMap uscMap = new USCMap();
-
         LatLng leavyLibrary = new LatLng(34.0217, -118.2828);
         googleMap.addMarker(new MarkerOptions().position(leavyLibrary).title("Leavey Library"));
         LatLng cpa = new LatLng(34.0213, -118.2840);

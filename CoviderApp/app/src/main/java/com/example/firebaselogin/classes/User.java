@@ -1,13 +1,13 @@
 package com.example.firebaselogin.classes;
 
 import static android.content.ContentValues.TAG;
-import static com.example.firebaselogin.MainActivity.mFirestore;
 import static com.example.firebaselogin.MainActivity.mUsers;
 
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.example.firebaselogin.enums.Status;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;

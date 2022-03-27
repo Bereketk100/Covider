@@ -17,7 +17,7 @@ import static com.example.firebaselogin.MainActivity.healthAnswered;
 import static com.example.firebaselogin.MainActivity.mUserDocRef;
 import static com.example.firebaselogin.MainActivity.thisUser;
 
-import com.example.firebaselogin.classes.Status;
+import com.example.firebaselogin.enums.Status;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 
@@ -235,7 +235,7 @@ public class HealthFormActivity extends AppCompatActivity {
         }
         else {
             thisUser.setStatus(Status.Healthy);
-            mUserDocRef.update("Status", Status.Infected).addOnSuccessListener(new OnSuccessListener<Void>() {
+            mUserDocRef.update("status", Status.Infected).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {
                     Log.d(TAG, "DocumentSnapshot successfully updated!");

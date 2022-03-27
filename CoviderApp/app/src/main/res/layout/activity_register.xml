@@ -59,25 +59,6 @@
         app:layout_constraintVertical_bias="0.213" />
 
     <EditText
-        android:id="@+id/register_email"
-        android:layout_width="303dp"
-        android:layout_height="50dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_centerInParent="true"
-        android:background="@drawable/border"
-        android:drawableLeft="@drawable/email"
-        android:fontFamily="@font/abel"
-        android:hint="  Email"
-        android:paddingLeft="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.415"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.441" />
-
-    <EditText
         android:id="@+id/register_name"
         android:layout_width="303dp"
         android:layout_height="50dp"
@@ -91,29 +72,39 @@
         android:paddingLeft="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.415"
+        app:layout_constraintHorizontal_bias="0.567"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.326" />
+        app:layout_constraintVertical_bias="0.458" />
+
+    <TextView
+        android:id="@+id/accTypeTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="124dp"
+        android:text="Account Type"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_register" />
 
     <EditText
-        android:id="@+id/register_username"
+        android:id="@+id/register_email"
         android:layout_width="303dp"
         android:layout_height="50dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_centerInParent="true"
         android:background="@drawable/border"
-        android:drawableLeft="@drawable/name"
+        android:drawableLeft="@drawable/email"
         android:fontFamily="@font/abel"
-        android:hint="  Username"
+        android:hint="  Email"
         android:paddingLeft="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.415"
+        app:layout_constraintHorizontal_bias="0.594"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.56" />
+        app:layout_constraintVertical_bias="0.557" />
 
     <EditText
         android:id="@+id/register_password"
@@ -129,10 +120,29 @@
         android:paddingLeft="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.393"
+        app:layout_constraintHorizontal_bias="0.594"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.685" />
+        app:layout_constraintVertical_bias="0.758" />
+
+    <EditText
+        android:id="@+id/register_username"
+        android:layout_width="303dp"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerInParent="true"
+        android:background="@drawable/border"
+        android:drawableLeft="@drawable/name"
+        android:fontFamily="@font/abel"
+        android:hint="  Username"
+        android:paddingLeft="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.594"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.658" />
 
     <Button
         android:id="@+id/register"
@@ -142,10 +152,9 @@
         android:text="Register"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.44"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.805" />
+        app:layout_constraintVertical_bias="0.879" />
 
     <TextView
         android:id="@+id/text_login"
@@ -162,5 +171,34 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/btnStudent"
+        android:layout_width="96dp"
+        android:layout_height="48dp"
+        android:backgroundTint="@color/light_gray"
+        android:text="Instructor"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.885"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.359"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/btnInstructor"
+        android:layout_width="96dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="208dp"
+        android:backgroundTint="@color/light_gray"
+        android:text="Student"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.359"
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

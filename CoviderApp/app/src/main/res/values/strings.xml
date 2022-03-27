@@ -6,9 +6,10 @@
     <string name="symptom3">Muscle Soreness or Headaches or Fatigue</string>
     <string name="symptom4">Difficulty Breathing or Shortness of Breath</string>
     <string name="symptom5">Cough or Runny Nose or Sore Throat</string>
-    <string name="symptom6">Conjunctivitis (inflammation of eye including redness, itching and tearing) ALONG WITH feeling feverish</string>
+    <string name="symptom6">Conjunctivitis (inflammation of eye including redness, itching and tearing)</string>
     <string name="symptom7">GI symptoms such as Abdominal Pain or Diarrhea or Nausea or Vomiting</string>
     <string name="yes">YES</string>
     <string name="no">NO</string>
     <string name="next">Next</string>
+    <string name="title_activity_maps">MapsActivity</string>
 </resources>

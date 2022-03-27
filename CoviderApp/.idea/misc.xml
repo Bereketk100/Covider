@@ -10,9 +10,14 @@
         <entry key="..\:/Users/ezhan/source/repos/CS310/Project2.3/Covider/CoviderApp/app/src/main/res/layout/activity_register.xml" value="0.2" />
         <entry key="..\:/Users/ezhan/source/repos/CS310/Project2.3/Covider/CoviderApp/app/src/main/res/layout/popup_window.xml" value="0.20104166666666667" />
         <entry key="..\:/Users/ezhan/source/repos/CS310/Project2.3/Covider/CoviderApp/app/src/main/res/layout/test_popup.xml" value="0.3" />
+        <entry key="app/src/main/res/layout/activity_health_form.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.24048913043478262" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.46466369628906257" />
+        <entry key="app/src/main/res/layout/activity_maps.xml" value="0.2546875" />
+        <entry key="app/src/main/res/layout/activity_popup.xml" value="0.2546875" />
+        <entry key="app/src/main/res/layout/activity_profile.xml" value="0.32372283935546875" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.24048913043478262" />
+        <entry key="app/src/main/res/layout/test_popup.xml" value="0.12386018237082067" />
       </map>
     </option>
   </component>

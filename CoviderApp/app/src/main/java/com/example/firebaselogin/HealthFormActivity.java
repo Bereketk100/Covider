@@ -22,14 +22,14 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 
 public class HealthFormActivity extends AppCompatActivity {
-// YES - > BUTTON
+    // YES - > BUTTON
 // NO - >  BUTTON
     boolean symptom1, symptom2, symptom3, symptom4, symptom5, symptom6, symptom7;
     boolean click1 = false, click2 = false, click3= false, click4= false,
-                click5= false, click6= false, click7= false;
+            click5= false, click6= false, click7= false;
     //button vars
     private Button btn1Yes, btn1No, btn2Yes, btn2No, btn3Yes, btn3No, btn4Yes, btn4No,
-                    btn5Yes, btn5No, btn6Yes, btn6No, btn7Yes, btn7No;
+            btn5Yes, btn5No, btn6Yes, btn6No, btn7Yes, btn7No;
     private Button btnNext;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

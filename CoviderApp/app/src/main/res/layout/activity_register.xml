@@ -81,9 +81,11 @@
         android:id="@+id/accTypeTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="124dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="144dp"
         android:text="Account Type"
+        android:textColor="@color/black"
+        android:fontFamily="@font/alike"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_register" />
 
@@ -174,31 +176,31 @@
 
     <Button
         android:id="@+id/btnInstructor"
-        android:layout_width="130dp"
+        android:layout_width="136dp"
         android:layout_height="48dp"
         android:backgroundTint="@color/light_gray"
         android:text="Instructor"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.885"
+        app:layout_constraintHorizontal_bias="0.835"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.359"
+        app:layout_constraintVertical_bias="0.355"
         tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/btnStudent"
-        android:layout_width="130dp"
-        android:layout_height="48dp"
-        android:layout_marginEnd="208dp"
+        android:layout_width="123dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="216dp"
         android:backgroundTint="@color/light_gray"
         android:text="Student"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.359"
+        app:layout_constraintVertical_bias="0.354"
         tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

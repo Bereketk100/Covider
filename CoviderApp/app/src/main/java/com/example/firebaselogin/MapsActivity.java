@@ -22,6 +22,9 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.core.Query;
 
 import java.util.HashMap;
@@ -36,6 +39,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private AlertDialog.Builder dialogBuilder;
     private AlertDialog dialog;
     private Button btnChekIn, btnViewRisk, btnViewStats, back;
+    private FirebaseAuth mAuth;
 
 
     @Override
@@ -214,8 +218,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
     public void createNewContactDialog(){
+//        FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
+//        CollectionReference mUsers = mFirestore.collection("users");
+//        FirebaseUser currentUser = mAuth.getCurrentUser();
 
-        //Query role
         dialogBuilder = new AlertDialog.Builder(this);
         //FOR STUDENT
         final View popup = getLayoutInflater().inflate(R.layout.activity_popup_student, null);

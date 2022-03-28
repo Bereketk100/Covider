@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.firebaselogin.classes.Instructor;
 import com.example.firebaselogin.classes.Student;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -35,8 +36,9 @@ public class RegisterActivity extends AppCompatActivity {
     //document instance to save to firestore
     private FirebaseAuth mAuth;
     private EditText email, name, username, password;
-    private Button btnRegister;
+    private Button btnRegister, btnStudent, btnInstructor;
     private TextView textLogin;
+    private boolean isInstruct = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,12 +48,39 @@ public class RegisterActivity extends AppCompatActivity {
         password = findViewById(R.id.register_password);
         // HIDE PASSWORD
         password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        //initviews
         name = findViewById(R.id.register_name);
         username = findViewById(R.id.register_username);
+        //initbuttons
         btnRegister  = findViewById(R.id.register);
+        btnStudent = findViewById(R.id.btnStudent);
+        btnInstructor = findViewById(R.id.btnInstructor);
+
         textLogin = findViewById(R.id.text_login);
         numUsers++;
-
+        //btn listeneres
+        btnStudent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                btnStudent.setBackgroundColor(getResources().getColor(R.color.purple_500));
+                btnStudent.setTextColor(getApplication().getResources().getColor(R.color.white));
+                btnInstructor.setBackgroundColor(getResources().getColor(R.color.light_gray));
+                btnInstructor.setTextColor(getApplication().getResources().getColor(R.color.black));
+                isInstruct = false;
+                Log.d("PRESS", "Student button pressed!");
+            }
+        });
+        btnInstructor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                btnInstructor.setBackgroundColor(getResources().getColor(R.color.purple_500));
+                btnInstructor.setTextColor(getApplication().getResources().getColor(R.color.white));
+                btnStudent.setBackgroundColor(getResources().getColor(R.color.light_gray));
+                btnStudent.setTextColor(getApplication().getResources().getColor(R.color.black));
+                isInstruct = true;
+                Log.d("PRESS", "Instructor button pressed!");
+            }
+        });
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,19 +131,36 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             });
             //add username, password, name to firestore user doc
-            Student student = new Student(numUsers, emailTxt, nameTxt, usernameTxt, passTxt);
+            if (!isInstruct){
+                Student student = new Student(numUsers, emailTxt, nameTxt, usernameTxt, passTxt);
 
-            mUsers.document(emailTxt).set(student).addOnSuccessListener(new OnSuccessListener<Void>() {
-                @Override
-                public void onSuccess(Void unused) {
-                    Log.d(TAG, "Document has been saved!");
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Log.w(TAG, "Document was not saved", e);
-                }
-            });
+                mUsers.document(emailTxt).set(student).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Log.d(TAG, "Student Document has been saved!");
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Document was not saved", e);
+                    }
+                });
+            }
+            else {
+                Instructor instructor = new Instructor(numUsers, emailTxt, nameTxt, usernameTxt, passTxt);
+                mUsers.document(emailTxt).set(instructor).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Log.d(TAG, "Instructor Document has been saved!");
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Document was not saved", e);
+                    }
+                });
+            }
+
             mUserDocRef = mFirestore.document("users/" + emailTxt);
         }
     }

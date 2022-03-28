@@ -7,6 +7,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.example.firebaselogin.enums.Role;
 import com.example.firebaselogin.enums.Status;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -17,11 +18,15 @@ import java.util.Date;
 import java.util.List;
 
 public abstract class User {
-    private int userID;
-    private String email, name, username, password;
-    private Status status;
-    private Date registerDate;
-    private List<Test> testRecords;
+    protected int userID;
+    protected String email;
+    protected String name;
+    protected String username;
+    protected String password;
+    protected Role role;
+    protected Status status;
+    protected Date registerDate;
+    protected List<Test> testRecords;
     //constructors
     User (){
     }
@@ -85,6 +90,14 @@ public abstract class User {
         this.status = status;
     }
 
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
     public Date getRegisterDate() {
         return registerDate;
     }
@@ -96,7 +109,6 @@ public abstract class User {
     //methods
     public void userAddTest(Test test){
         //adding Firestore document to user subcollection testRecords
-
         CollectionReference mRecords = mUsers.document(email).collection("testRecords");
         mRecords.document(test.getDate().toString()).set(test).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
@@ -114,6 +126,7 @@ public abstract class User {
         }
         testRecords.add(test);
     }
+
 
 
 }

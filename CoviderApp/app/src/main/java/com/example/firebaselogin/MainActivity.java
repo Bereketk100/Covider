@@ -21,7 +21,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
-    private Button btnLogout, btnprof;
+    private Button btnLogout, btnprof, btnMap;
     private FirebaseAnalytics analytics = FirebaseAnalytics.getInstance(this);
 
     public static FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mAuth = FirebaseAuth.getInstance();
-
         btnLogout = findViewById(R.id.btnlogout);
         btnLogout.setOnClickListener(new View.OnClickListener() {
 
@@ -55,6 +54,16 @@ public class MainActivity extends AppCompatActivity {
                 fetchProf();
             }
         });
+
+        btnMap = findViewById(R.id.map);
+        btnMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                displayMap();
+            }
+        });
+
+
     }
 
     @Override
@@ -83,16 +92,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void logout() {
-
         FirebaseAuth.getInstance().signOut();
         startActivity(new Intent(MainActivity.this, LoginActivity.class));
-
     }
 
     public void fetchProf(){
         startActivity(new Intent(MainActivity.this, ProfileActivity.class));
         //maybe add onFailureListener
     }
+
+    public void displayMap(){
+        startActivity(new Intent(MainActivity.this, MapsActivity.class));
+    }
 }
-
-

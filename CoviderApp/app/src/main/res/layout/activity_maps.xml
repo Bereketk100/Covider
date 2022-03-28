@@ -14,22 +14,39 @@
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
         tools:context=".MapsActivity" />
 
     <Button
         android:id="@+id/btnLogout"
-        android:layout_width="225dp"
-        android:layout_height="52dp"
+        android:layout_width="166dp"
+        android:layout_height="46dp"
         android:backgroundTint="#B60001"
         android:text="Log Out"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.934"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.942" />
+        app:layout_constraintVertical_bias="0.944" />
+
+    <Button
+        android:id="@+id/home"
+        android:layout_width="175dp"
+        android:layout_height="45dp"
+        android:backgroundTint="#B60001"
+        android:text="Home Page"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.067"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.943" />
 
     <Button
         android:id="@+id/btnprof"

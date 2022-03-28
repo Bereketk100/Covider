@@ -29,7 +29,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     private ActivityMapsBinding binding;
     private HashMap<String, Integer> visited = new HashMap<String, Integer>();
-    private Button logout, prof;
+    private Button prof;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +55,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        Button logout;
+        Button logout, homepage;
         mMap = googleMap;
         //get latlong for corners for specified place
         LatLng one = new LatLng(34.02171266975199, -118.29074167058317);
@@ -121,11 +121,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
+
         prof = findViewById(R.id.btnprof);
         prof.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 fetchProf();
+            }
+        });
+
+        homepage = findViewById(R.id.home);
+        homepage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                home();
             }
         });
 
@@ -136,6 +145,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         FirebaseAuth.getInstance().signOut();
         startActivity(new Intent(MapsActivity.this, LoginActivity.class));
     }
+
+    public void home() {
+        startActivity(new Intent(MapsActivity.this, MainActivity.class));
+    }
+
 
     public void fetchProf(){
         startActivity(new Intent(MapsActivity.this, ProfileActivity.class));

@@ -115,12 +115,14 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 test.setResult(true);
+                mStatusView.setText("Status: Infected");
             }
         });
         btnNo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 test.setResult(false);
+                mStatusView.setText("Status: Healthy");
             }
         });
         btnDone.setOnClickListener(new View.OnClickListener() {

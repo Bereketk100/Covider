@@ -8,11 +8,12 @@
     tools:context=".popupActivity">
 
     <Button
-        android:id="@+id/button"
-        android:layout_width="248dp"
-        android:layout_height="75dp"
+        android:id="@+id/checkIn"
+        android:layout_width="182dp"
+        android:layout_height="42dp"
         android:backgroundTint="@color/red"
         android:text="Check In"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
@@ -21,89 +22,91 @@
         app:layout_constraintVertical_bias="0.307" />
 
     <Button
-        android:id="@+id/button4"
-        android:layout_width="248dp"
-        android:layout_height="75dp"
+        android:id="@+id/viewRisk"
+        android:layout_width="195dp"
+        android:layout_height="41dp"
         android:backgroundTint="@color/red"
         android:text="View Risk Factor"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.457" />
+        app:layout_constraintVertical_bias="0.421" />
 
     <Button
-        android:id="@+id/button5"
-        android:layout_width="248dp"
-        android:layout_height="75dp"
+        android:id="@+id/viewStats"
+        android:layout_width="187dp"
+        android:layout_height="44dp"
         android:backgroundTint="@color/red"
         android:text="View Stats"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.513"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.525" />
+
+    <TextView
+        android:id="@+id/size"
+        android:layout_width="287dp"
+        android:layout_height="479dp"
+        android:fontFamily="monospace"
+        android:text="Here are your options!"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.604"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/instructor"
+        android:layout_width="186dp"
+        android:layout_height="37dp"
+        android:fontFamily="monospace"
+        android:gravity="center"
+        android:text="Instructor Options"
+        android:textColor="@color/white"
+        android:textSize="17dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.608" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="144dp"
-        android:layout_height="264dp"
-
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.94"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.965" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="149dp"
-        android:layout_height="33dp"
-        android:fontFamily="monospace"
-        android:text="Hi BK,"
-
-        android:textColor="@color/white"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.687"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.097"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="277dp"
-        android:layout_height="48dp"
-        android:fontFamily="monospace"
-
-        android:text="Here are your options!"
-        android:textColor="@color/white"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.608"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.161"
+        app:layout_constraintVertical_bias="0.181"
         tools:ignore="MissingConstraints" />
 
     <Button
-        android:id="@+id/button6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/back"
+        android:layout_width="175dp"
+        android:layout_height="41dp"
         android:backgroundTint="@color/red"
         android:text="Back"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.097"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.859"
+        app:layout_constraintVertical_bias="0.747"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/alert"
+        android:layout_width="175dp"
+        android:layout_height="41dp"
+        android:backgroundTint="@color/red"
+        android:text="alert"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.64"
         tools:ignore="MissingConstraints" />
 
 

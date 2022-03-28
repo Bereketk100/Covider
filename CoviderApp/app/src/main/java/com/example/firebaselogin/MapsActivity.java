@@ -1,5 +1,6 @@
 package com.example.firebaselogin;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -20,6 +21,8 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.core.Query;
 
 import java.util.HashMap;
 
@@ -30,6 +33,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private ActivityMapsBinding binding;
     private HashMap<String, Integer> visited = new HashMap<String, Integer>();
     private Button prof;
+    private AlertDialog.Builder dialogBuilder;
+    private AlertDialog dialog;
+    private Button btnChekIn, btnViewRisk, btnViewStats, back;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,8 +110,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                         @Override
                         public void run() {
-                            MapsActivity.this.startActivity(new Intent(MapsActivity.this, popupActivity.class));
-
+                            createNewContactDialog();
                         }
                     }, 100);
 
@@ -205,4 +211,31 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LatLng adm = new LatLng(34.020947159208745, -118.2855621558506);
         googleMap.addMarker(new MarkerOptions().position(adm).title("Bovard Administration Building"));
     }
+
+
+    public void createNewContactDialog(){
+
+        //Query role
+        dialogBuilder = new AlertDialog.Builder(this);
+        //FOR STUDENT
+        final View popup = getLayoutInflater().inflate(R.layout.activity_popup_student, null);
+        // FOR INSTRUCTOR
+        //final View popup = getLayoutInflater().inflate(R.layout.popup_instructor, null);
+
+        btnChekIn = popup.findViewById(R.id.checkIn);
+        btnViewRisk = popup.findViewById(R.id.viewRisk);
+        btnViewStats = popup.findViewById(R.id.viewStats);
+        back = popup.findViewById(R.id.back);
+        // show the popup window
+        dialogBuilder.setView(popup);
+        dialog = dialogBuilder.create();
+        dialog.show();
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+    }
+
 }

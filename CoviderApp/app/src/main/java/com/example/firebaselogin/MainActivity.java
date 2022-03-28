@@ -79,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
         }
         else if (!healthAnswered) { //gets document snapshot of currentUser if someone is already logged in
             String emailTxt = mAuth.getCurrentUser().getEmail();
+
             mUserDocRef = mUsers.document(emailTxt);
             mUserDocRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                 @Override

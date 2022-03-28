@@ -100,15 +100,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(MainActivity.this, ProfileActivity.class));
         //maybe add onFailureListener
     }
-<<<<<<< HEAD
-=======
-
-    public void displayMap(){
-        startActivity(new Intent(MainActivity.this, MapsActivity.class));
-    }
-}
-
->>>>>>> d1fd828d572fa55f3591f8e8c211d661cce123c3
 
     public void displayMap(){
         startActivity(new Intent(MainActivity.this, MapsActivity.class));

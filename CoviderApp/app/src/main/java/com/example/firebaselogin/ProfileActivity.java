@@ -2,7 +2,9 @@ package com.example.firebaselogin;
 
 import static com.example.firebaselogin.MainActivity.thisUser;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,11 +27,18 @@ import java.util.Date;
 
 @SuppressWarnings("ALL")
 public class ProfileActivity extends AppCompatActivity {
-    private Button btnHome, btnAddTest;
+    private AlertDialog.Builder dialogBuilder;
+    private AlertDialog dialog;
+    private EditText editTestDate;
     private ImageButton btnNo, btnYes, btnDone;
+
+
+
+
+    private Button btnHome, btnAddTest;
     private static FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
     private TextView mNameView, mEmailView, mUserView, mPassView, mStatusView;
-    private EditText editTestDate;
+
     private Test test;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +49,6 @@ public class ProfileActivity extends AppCompatActivity {
         //buttons
         btnHome = (Button) findViewById(R.id.homePage);
         btnAddTest = (Button) findViewById(R.id.btnAddTest);
-
-
 
         btnAddTest.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,17 +93,15 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     public void onButtonShowPopupWindowClick(View v) {
-
         // inflate the layout of the popup window
         LayoutInflater inflater = (LayoutInflater)
                 getSystemService(LAYOUT_INFLATER_SERVICE);
         View popupView = inflater.inflate(R.layout.test_popup, null);
 
         // create the popup window
-        int width = LinearLayout.LayoutParams.WRAP_CONTENT;
-        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+
         boolean focusable = true; // lets taps outside the popup also dismiss it
-        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+        final PopupWindow popupWindow = new PopupWindow(popupView, 1000, 1200, focusable);
         btnNo = (ImageButton) popupView.findViewById(R.id.btnNo);
         btnYes = (ImageButton) popupView.findViewById(R.id.btnYes);
         btnDone = (ImageButton) popupView.findViewById(R.id.btnDone);
@@ -110,12 +115,14 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 test.setResult(true);
+                mStatusView.setText("Status: Infected");
             }
         });
         btnNo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 test.setResult(false);
+                mStatusView.setText("Status: Healthy");
             }
         });
         btnDone.setOnClickListener(new View.OnClickListener() {
@@ -141,6 +148,20 @@ public class ProfileActivity extends AppCompatActivity {
         Date date = new Date(year, month, day);
         return date;
     }
+//
+//    public void createNewContactDialog(){
+//        dialogBuilder = new AlertDialog.Builder(this);
+//        final View popup = getLayoutInflater().inflate(R.layout.test_popup, null);
+//        btnNo = (ImageButton) popup.findViewById(R.id.btnNo);
+//        btnYes = (ImageButton) popup.findViewById(R.id.btnYes);
+//        btnDone = (ImageButton) popup.findViewById(R.id.btnDone);
+//        //editText
+//        editTestDate = (EditText) popup.findViewById(R.id.enterDate);
+//        // show the popup window
+//        dialogBuilder.setView(popup);
+//        dialog = dialogBuilder.create();
+//        dialog.show();
+//    }
 
 
 }

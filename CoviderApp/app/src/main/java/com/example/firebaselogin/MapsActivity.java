@@ -3,6 +3,8 @@ package com.example.firebaselogin;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.fragment.app.FragmentActivity;
@@ -17,6 +19,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.HashMap;
 
@@ -26,6 +29,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     private ActivityMapsBinding binding;
     private HashMap<String, Integer> visited = new HashMap<String, Integer>();
+    private Button logout, prof;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +55,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        Button logout;
         mMap = googleMap;
         //get latlong for corners for specified place
         LatLng one = new LatLng(34.02171266975199, -118.29074167058317);
@@ -108,12 +113,37 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
+        logout = findViewById(R.id.btnLogout);
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                logout();
+            }
+        });
 
+        prof = findViewById(R.id.btnprof);
+        prof.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fetchProf();
+            }
+        });
+
+    }
+
+
+    public void logout() {
+        FirebaseAuth.getInstance().signOut();
+        startActivity(new Intent(MapsActivity.this, LoginActivity.class));
+    }
+
+    public void fetchProf(){
+        startActivity(new Intent(MapsActivity.this, ProfileActivity.class));
+        //maybe add onFailureListener
     }
 
     public void initializeBuildings(GoogleMap googleMap) {
         USCMap uscMap = new USCMap();
-
         LatLng leavyLibrary = new LatLng(34.0217, -118.2828);
         googleMap.addMarker(new MarkerOptions().position(leavyLibrary).title("Leavey Library"));
         LatLng cpa = new LatLng(34.0213, -118.2840);

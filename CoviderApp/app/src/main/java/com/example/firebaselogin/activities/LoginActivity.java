@@ -19,6 +19,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import static com.example.firebaselogin.activities.MainActivity.mFirestore;
 import static com.example.firebaselogin.activities.MainActivity.mUserDocRef;
@@ -73,6 +74,18 @@ public class LoginActivity extends AppCompatActivity {
                     {
                         //sets mUserDocRef and thisUser upon successful login
                         Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                        FirebaseMessaging.getInstance().subscribeToTopic("users")
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@android.support.annotation.NonNull Task<Void> task) {
+                                        String msg = "";
+                                        if (!task.isSuccessful()) {
+                                            msg = "";
+                                        }
+                                        Log.d(TAG, msg);
+                                        Toast.makeText(LoginActivity.this, msg, Toast.LENGTH_SHORT).show();
+                                    }
+                                });
                         mUserDocRef = mFirestore.document("users/" + user);
                         mUserDocRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                             @Override

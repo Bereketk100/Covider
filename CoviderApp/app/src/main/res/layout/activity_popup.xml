@@ -64,23 +64,6 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
-    <TextView
-        android:id="@+id/studnet"
-        android:layout_width="186dp"
-        android:layout_height="37dp"
-        android:fontFamily="monospace"
-        android:gravity="center"
-        android:text="Student Options"
-        android:textColor="@color/white"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.181"
-        tools:ignore="MissingConstraints" />
-
     <Button
         android:id="@+id/back"
         android:layout_width="175dp"

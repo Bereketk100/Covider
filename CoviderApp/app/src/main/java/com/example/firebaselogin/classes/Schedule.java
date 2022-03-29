@@ -5,5 +5,7 @@ import java.util.Map;
 
 public class Schedule {
     private Map<Date, Class> schedule;
+    private Date currentTime;
+    
 
 }

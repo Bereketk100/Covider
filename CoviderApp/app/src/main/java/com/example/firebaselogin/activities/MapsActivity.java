@@ -181,6 +181,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                     createRiskPopup();
                                 }
                             });
+
+
                         }
                     }, 100);
 
@@ -308,10 +310,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         dialogBuilder = new AlertDialog.Builder(this);
         final View popup = getLayoutInflater().inflate(R.layout.view_risk_factor, null);
         back = popup.findViewById(R.id.back);
+        riskDone = popup.findViewById(R.id.doneFeature);
         // show the popup window
         dialogBuilder.setView(popup);
         dialog = dialogBuilder.create();
         dialog.show();
+        riskDone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
 
 
     }

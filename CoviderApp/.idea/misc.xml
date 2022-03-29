@@ -16,7 +16,7 @@
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_maps.xml" value="0.28106508875739644" />
-        <entry key="app/src/main/res/layout/activity_popup.xml" value="0.22887268066406255" />
+        <entry key="app/src/main/res/layout/activity_popup.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_popup_Instructor.xml" value="0.18568840579710144" />
         <entry key="app/src/main/res/layout/activity_popup_instru.xml" value="0.25052083333333336" />
         <entry key="app/src/main/res/layout/activity_popup_instructor.xml" value="0.25052083333333336" />
@@ -25,6 +25,7 @@
         <entry key="app/src/main/res/layout/popup_instructor.xml" value="0.2390625" />
         <entry key="app/src/main/res/layout/test_popup.xml" value="0.27174072265625004" />
         <entry key="app/src/main/res/layout/testtt.xml" value="0.15353260869565216" />
+        <entry key="app/src/main/res/layout/view_risk_factor.xml" value="0.16145833333333334" />
       </map>
     </option>
   </component>

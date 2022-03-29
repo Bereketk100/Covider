@@ -1,18 +1,28 @@
 package com.example.firebaselogin.activities;
 
+import static android.content.ContentValues.TAG;
+import static com.example.firebaselogin.activities.MainActivity.mFirestore;
+import static com.example.firebaselogin.activities.MainActivity.mUsers;
+import static com.example.firebaselogin.activities.MainActivity.thisUser;
+
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
 import com.example.firebaselogin.BuildingQuestion;
 import com.example.firebaselogin.R;
+import com.example.firebaselogin.classes.Building;
 import com.example.firebaselogin.classes.USCMap;
+import com.example.firebaselogin.classes.User;
 import com.example.firebaselogin.databinding.ActivityMapsBinding;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -22,8 +32,17 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,7 +55,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private Button prof;
     private AlertDialog.Builder dialogBuilder;
     private AlertDialog dialog;
-    private Button btnChekIn, btnViewRisk, btnViewStats, back;
+    private Button btnChekIn, btnViewRisk, btnViewStats, back, riskDone;
     private FirebaseAuth mAuth;
 
 
@@ -116,17 +135,50 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             btnChekIn.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
+                                    Log.d("BUTTON", "Check in btn pressedem!");
+                                    //updating list of buildings
                                     System.out.println(markerName);
                                     if(markerName.equals("Fertitta Hall") || markerName.equals("Leavey Library") ||markerName.equals("Kaprielian Hall") || markerName.equals("Lyon Center") || markerName.equals("Leventhal School of Accounting")) {
                                         Toast.makeText(MapsActivity.this, "Form Required!", Toast.LENGTH_SHORT).show();
                                         startActivity(new Intent(MapsActivity.this, BuildingQuestion.class));
                                     } else {
                                         Toast.makeText(MapsActivity.this, "Checked In!", Toast.LENGTH_SHORT).show();
+                                        //updates database
+                                        Task<QuerySnapshot> mBuilding = mFirestore.collection("buildings")
+                                                .whereEqualTo("name", "Leavey Library")
+                                                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                                        if (task.isSuccessful()) {
+                                                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                                                Log.d("BUILDING", "Building found!");
+                                                            }
+                                                        }
+                                                    }
+                                                });
+                                        String s = mBuilding.getResult().getDocuments().get(0).toString();
+                                        CollectionReference mPresentUsers = mFirestore.collection("buildings").document(s).collection("presentUsers");
+                                        mPresentUsers.document(thisUser.getEmail()).set(thisUser).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void unused) {
+                                                Log.d("DOC", "Document has been saved!"); }
+                                        }).addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Log.w("DOC", "Document was not saved", e);
+                                            }
+                                        });
 
                                         startActivity(new Intent(MapsActivity.this, MapsActivity.class));
 
                                     }
 
+                                }
+                            });
+                            btnViewRisk.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    createRiskPopup();
                                 }
                             });
                         }
@@ -179,6 +231,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         startActivity(new Intent(MapsActivity.this, ProfileActivity.class));
         //maybe add onFailureListener
     }
+
 
     public void initializeBuildings(GoogleMap googleMap) {
         USCMap uscMap = new USCMap();
@@ -248,6 +301,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 dialog.dismiss();
             }
         });
+
+
+    }
+    private void createRiskPopup() {
+        dialogBuilder = new AlertDialog.Builder(this);
+        final View popup = getLayoutInflater().inflate(R.layout.view_risk_factor, null);
+        back = popup.findViewById(R.id.back);
+        // show the popup window
+        dialogBuilder.setView(popup);
+        dialog = dialogBuilder.create();
+        dialog.show();
 
 
     }

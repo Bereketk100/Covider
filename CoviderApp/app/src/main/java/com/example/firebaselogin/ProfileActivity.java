@@ -8,6 +8,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -18,9 +20,26 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import com.example.firebaselogin.classes.MySingleton;
 import com.example.firebaselogin.classes.Test;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.messaging.FirebaseMessaging;
+
 import static com.example.firebaselogin.MainActivity.thisUser;
 
 import java.util.Date;
@@ -31,10 +50,13 @@ public class ProfileActivity extends AppCompatActivity {
     private AlertDialog dialog;
     private EditText editTestDate;
     private ImageButton btnNo, btnYes, btnDone;
-
-
-
-
+    final private String FCM_API = "https://fcm.googleapis.com/fcm/send";
+    final private String serverKey = "key=" + "AAAA2w3OKU0:APA91bEEnzG1HM7xyCjW2RXfT1SSd_3zGqJSudwxmOBED8_BgNy_pUn0iCl7fDv0Fk7fvyF7GoWTg2CFgU6c10L9R8Yo04gD7zlXJcDNSrr9s9YXYxp1pCsDmVjVa0TdplWliZV-nI3c";
+    final private String contentType = "application/json";
+    final String TAG = "NOTIFICATION TAG";
+    String NOTIFICATION_TITLE;
+    String NOTIFICATION_MESSAGE;
+    String TOPIC;
     private Button btnHome, btnAddTest;
     private static FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
     private TextView mNameView, mEmailView, mUserView, mPassView, mStatusView;
@@ -67,6 +89,33 @@ public class ProfileActivity extends AppCompatActivity {
 
         });
     }
+
+    private void sendNotification(JSONObject notification) {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(FCM_API, notification,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.i(TAG, "onResponse: " + response.toString());
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(ProfileActivity.this, "Request error", Toast.LENGTH_LONG).show();
+                        Log.i(TAG, "onErrorResponse: Didn't work");
+                    }
+                }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Authorization", serverKey);
+                params.put("Content-Type", contentType);
+                return params;
+            }
+        };
+        MySingleton.getInstance(getApplicationContext()).addToRequestQueue(jsonObjectRequest);
+    }
+
     public void setViews(){
         mNameView = (TextView) findViewById(R.id.nameView);
         mEmailView = (TextView) findViewById(R.id.emailView);
@@ -130,6 +179,21 @@ public class ProfileActivity extends AppCompatActivity {
             public void onClick(View view) {
                 test.setDate(dateParser(getDate()));
                 thisUser.userAddTest(test);
+                TOPIC = "/topics/users";
+                NOTIFICATION_TITLE = "NEW POSITIVE COVID CASE";
+                NOTIFICATION_MESSAGE = thisUser.getName() + " tested positive for covid-19";
+                JSONObject notification = new JSONObject();
+                JSONObject notifcationBody = new JSONObject();
+                try {
+                    notifcationBody.put("title", NOTIFICATION_TITLE);
+                    notifcationBody.put("message", NOTIFICATION_MESSAGE);
+
+                    notification.put("to", TOPIC);
+                    notification.put("data", notifcationBody);
+                } catch (JSONException e) {
+                    Log.e(TAG, "onCreate: " + e.getMessage() );
+                }
+                sendNotification(notification);
                 popupWindow.dismiss();
             }
         });

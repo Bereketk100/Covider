@@ -1,4 +1,4 @@
-package com.example.firebaselogin;
+package com.example.firebaselogin.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,7 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.firebaselogin.R;
 import com.example.firebaselogin.classes.Student;
 import com.example.firebaselogin.classes.User;
 import com.google.android.gms.tasks.OnSuccessListener;

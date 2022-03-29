@@ -1,7 +1,7 @@
 package com.example.firebaselogin.classes;
 
 import static android.content.ContentValues.TAG;
-import static com.example.firebaselogin.MainActivity.mUsers;
+import static com.example.firebaselogin.activities.MainActivity.mUsers;
 
 import android.util.Log;
 

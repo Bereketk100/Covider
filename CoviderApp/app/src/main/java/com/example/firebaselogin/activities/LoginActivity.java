@@ -1,19 +1,17 @@
-package com.example.firebaselogin;
-import static android.content.ContentValues.TAG;
+package com.example.firebaselogin.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.firebaselogin.classes.Instructor;
+import com.example.firebaselogin.R;
 import com.example.firebaselogin.classes.Student;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -22,10 +20,9 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 
-import static com.example.firebaselogin.MainActivity.mFirestore;
-import static com.example.firebaselogin.MainActivity.mUserDocRef;
-import static com.example.firebaselogin.MainActivity.mUsers;
-import static com.example.firebaselogin.MainActivity.thisUser;
+import static com.example.firebaselogin.activities.MainActivity.mFirestore;
+import static com.example.firebaselogin.activities.MainActivity.mUserDocRef;
+import static com.example.firebaselogin.activities.MainActivity.thisUser;
 
 public class LoginActivity extends AppCompatActivity {
 

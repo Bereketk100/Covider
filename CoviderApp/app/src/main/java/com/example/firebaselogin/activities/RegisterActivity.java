@@ -1,9 +1,9 @@
-package com.example.firebaselogin;
+package com.example.firebaselogin.activities;
 
-import static com.example.firebaselogin.MainActivity.mUsers;
-import static com.example.firebaselogin.MainActivity.numUsers;
-import static com.example.firebaselogin.MainActivity.mFirestore;
-import static com.example.firebaselogin.MainActivity.mUserDocRef;
+import static com.example.firebaselogin.activities.MainActivity.mUsers;
+import static com.example.firebaselogin.activities.MainActivity.numUsers;
+import static com.example.firebaselogin.activities.MainActivity.mFirestore;
+import static com.example.firebaselogin.activities.MainActivity.mUserDocRef;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.firebaselogin.R;
 import com.example.firebaselogin.classes.Instructor;
 import com.example.firebaselogin.classes.Student;
 import com.google.android.gms.tasks.OnCompleteListener;

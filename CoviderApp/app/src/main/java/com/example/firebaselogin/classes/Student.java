@@ -1,19 +1,6 @@
 package com.example.firebaselogin.classes;
 
-import static android.content.ContentValues.TAG;
-import static com.example.firebaselogin.MainActivity.mUsers;
-
-import android.util.Log;
-
-import androidx.annotation.NonNull;
-
-import com.example.firebaselogin.classes.User;
 import com.example.firebaselogin.enums.Role;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.CollectionReference;
-
-import java.util.ArrayList;
 
 public class Student extends User {
     public Student() {

@@ -1,27 +1,24 @@
-package com.example.firebaselogin;
+package com.example.firebaselogin.activities;
 
-import static com.example.firebaselogin.MainActivity.thisUser;
+import static com.example.firebaselogin.activities.MainActivity.thisUser;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.example.firebaselogin.R;
 import com.example.firebaselogin.classes.Test;
 import com.google.firebase.firestore.FirebaseFirestore;
-import static com.example.firebaselogin.MainActivity.thisUser;
 
 import java.util.Date;
 

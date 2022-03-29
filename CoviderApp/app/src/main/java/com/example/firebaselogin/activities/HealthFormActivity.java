@@ -1,4 +1,4 @@
-package com.example.firebaselogin;
+package com.example.firebaselogin.activities;
 
 
 import static android.content.ContentValues.TAG;
@@ -13,10 +13,11 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import static com.example.firebaselogin.MainActivity.healthAnswered;
-import static com.example.firebaselogin.MainActivity.mUserDocRef;
-import static com.example.firebaselogin.MainActivity.thisUser;
+import static com.example.firebaselogin.activities.MainActivity.healthAnswered;
+import static com.example.firebaselogin.activities.MainActivity.mUserDocRef;
+import static com.example.firebaselogin.activities.MainActivity.thisUser;
 
+import com.example.firebaselogin.R;
 import com.example.firebaselogin.enums.Status;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;

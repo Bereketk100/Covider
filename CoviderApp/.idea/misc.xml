@@ -11,17 +11,24 @@
         <entry key="..\:/Users/ezhan/source/repos/CS310/Project2.3/Covider/CoviderApp/app/src/main/res/layout/activity_register.xml" value="0.2" />
         <entry key="..\:/Users/ezhan/source/repos/CS310/Project2.3/Covider/CoviderApp/app/src/main/res/layout/popup_window.xml" value="0.20104166666666667" />
         <entry key="..\:/Users/ezhan/source/repos/CS310/Project2.3/Covider/CoviderApp/app/src/main/res/layout/test_popup.xml" value="0.3" />
+        <entry key="app/src/main/res/drawable/border.xml" value="0.186" />
+        <entry key="app/src/main/res/layout/activity_building_question.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_health_form.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_login.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.23516693115234377" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_maps.xml" value="0.28106508875739644" />
         <entry key="app/src/main/res/layout/activity_popup.xml" value="0.22887268066406255" />
         <entry key="app/src/main/res/layout/activity_popup_Instructor.xml" value="0.18568840579710144" />
         <entry key="app/src/main/res/layout/activity_popup_instru.xml" value="0.25052083333333336" />
         <entry key="app/src/main/res/layout/activity_popup_instructor.xml" value="0.25052083333333336" />
+        <entry key="app/src/main/res/layout/activity_popup_student.xml" value="0.31066436767578126" />
         <entry key="app/src/main/res/layout/activity_profile.xml" value="0.31533938321200283" />
+        <entry key="app/src/main/res/layout/activity_questionaire.xml" value="0.21693840579710144" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.29983971637228257" />
+        <entry key="app/src/main/res/layout/content_building_question.xml" value="0.1203125" />
+        <entry key="app/src/main/res/layout/fragment_second.xml" value="0.21693840579710144" />
         <entry key="app/src/main/res/layout/popup_instructor.xml" value="0.2390625" />
+        <entry key="app/src/main/res/layout/question.xml" value="0.21693840579710144" />
         <entry key="app/src/main/res/layout/test_popup.xml" value="0.27174072265625004" />
         <entry key="app/src/main/res/layout/testtt.xml" value="0.15353260869565216" />
       </map>

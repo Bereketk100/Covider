@@ -21,13 +21,9 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.core.Query;
 
 import java.util.HashMap;
+import java.util.Map;
 
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
@@ -115,6 +111,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         @Override
                         public void run() {
                             createNewContactDialog();
+                            btnChekIn.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    System.out.println(markerName);
+                                    if(markerName.equals("Fertitta Hall") || markerName.equals("Leavey Library") ||markerName.equals("Kaprielian Hall") || markerName.equals("Lyon Center") || markerName.equals("Leventhal School of Accounting")) {
+                                        Toast.makeText(MapsActivity.this, "Form Required!", Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(MapsActivity.this, BuildingQuestion.class));
+                                    } else {
+                                        Toast.makeText(MapsActivity.this, "Checked In!", Toast.LENGTH_SHORT).show();
+
+                                        startActivity(new Intent(MapsActivity.this, MapsActivity.class));
+
+                                    }
+
+                                }
+                            });
                         }
                     }, 100);
 
@@ -218,16 +230,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
     public void createNewContactDialog(){
-//        FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
-//        CollectionReference mUsers = mFirestore.collection("users");
-//        FirebaseUser currentUser = mAuth.getCurrentUser();
-
         dialogBuilder = new AlertDialog.Builder(this);
-        //FOR STUDENT
-        final View popup = getLayoutInflater().inflate(R.layout.activity_popup_student, null);
-        // FOR INSTRUCTOR
-        //final View popup = getLayoutInflater().inflate(R.layout.popup_instructor, null);
-
+        final View popup = getLayoutInflater().inflate(R.layout.activity_popup, null);
         btnChekIn = popup.findViewById(R.id.checkIn);
         btnViewRisk = popup.findViewById(R.id.viewRisk);
         btnViewStats = popup.findViewById(R.id.viewStats);
@@ -242,6 +246,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 dialog.dismiss();
             }
         });
+
+
     }
 
 }

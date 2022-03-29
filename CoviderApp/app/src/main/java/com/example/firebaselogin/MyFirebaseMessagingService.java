@@ -16,11 +16,9 @@ import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
 
-import com.example.firebaselogin.MainActivity;
-import com.example.firebaselogin.R;
+import com.example.firebaselogin.activities.MainActivity;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
-
 
 import java.util.Random;
 

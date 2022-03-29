@@ -9,6 +9,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.firebaselogin.activities.MainActivity;
+import com.example.firebaselogin.activities.MapsActivity;
+
 public class BuildingQuestion extends AppCompatActivity {
     boolean symptom11, symptom22, symptom33;
     boolean click11 = false, click22 = false, click33= false;

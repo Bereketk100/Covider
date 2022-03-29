@@ -18,10 +18,7 @@ import android.widget.ImageButton;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
-
-<<<<<<< HEAD:CoviderApp/app/src/main/java/com/example/firebaselogin/activities/ProfileActivity.java
 import com.example.firebaselogin.R;
-=======
 import com.android.volley.AuthFailureError;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -34,18 +31,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.example.firebaselogin.classes.MySingleton;
->>>>>>> 4535cb3bd8293d9ffd5aad77782c7a3d81a97071:CoviderApp/app/src/main/java/com/example/firebaselogin/ProfileActivity.java
 import com.example.firebaselogin.classes.Test;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
-<<<<<<< HEAD:CoviderApp/app/src/main/java/com/example/firebaselogin/activities/ProfileActivity.java
-=======
 import com.google.firebase.messaging.FirebaseMessaging;
-
-import static com.example.firebaselogin.MainActivity.thisUser;
->>>>>>> 4535cb3bd8293d9ffd5aad77782c7a3d81a97071:CoviderApp/app/src/main/java/com/example/firebaselogin/ProfileActivity.java
-
+import static com.example.firebaselogin.activities.MainActivity.thisUser;
 import java.util.Date;
 
 @SuppressWarnings("ALL")

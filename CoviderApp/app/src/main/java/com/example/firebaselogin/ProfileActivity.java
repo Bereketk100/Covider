@@ -212,20 +212,6 @@ public class ProfileActivity extends AppCompatActivity {
         Date date = new Date(year, month, day);
         return date;
     }
-//
-//    public void createNewContactDialog(){
-//        dialogBuilder = new AlertDialog.Builder(this);
-//        final View popup = getLayoutInflater().inflate(R.layout.test_popup, null);
-//        btnNo = (ImageButton) popup.findViewById(R.id.btnNo);
-//        btnYes = (ImageButton) popup.findViewById(R.id.btnYes);
-//        btnDone = (ImageButton) popup.findViewById(R.id.btnDone);
-//        //editText
-//        editTestDate = (EditText) popup.findViewById(R.id.enterDate);
-//        // show the popup window
-//        dialogBuilder.setView(popup);
-//        dialog = dialogBuilder.create();
-//        dialog.show();
-//    }
 
 
 }

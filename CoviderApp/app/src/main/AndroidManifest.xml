@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.firebaselogin">
+    package="com.example.firebaselogin" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
@@ -11,6 +11,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+<<<<<<< HEAD
         android:theme="@style/Theme.Firebaselogin">
         <service
             android:name=".MyFirebaseMessagingService"
@@ -21,6 +22,12 @@
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
             </intent-filter>
         </service>
+=======
+        android:theme="@style/Theme.Firebaselogin" >
+        <activity
+            android:name=".BuildingQuestion"
+            android:exported="false" />
+>>>>>>> f27619fe12ee6475c10280a90643557c23d8e2bf
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 
@@ -38,7 +45,11 @@
 
         <activity
             android:name=".LoginActivity"
+<<<<<<< HEAD
             android:exported="true">
+=======
+            android:exported="true" >
+>>>>>>> f27619fe12ee6475c10280a90643557c23d8e2bf
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -60,7 +71,7 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

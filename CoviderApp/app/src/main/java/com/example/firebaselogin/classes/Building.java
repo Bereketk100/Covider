@@ -1,11 +1,15 @@
 package com.example.firebaselogin.classes;
 
- class Building {
+import java.util.List;
+
+class Building {
      private String name;
      private double latitude;
      private double longitude;
      private int id;
      private int riskFactor = 0;
+     private List<User> presentUsers;
+     private List<User> usersInPast3Days;
 
      public Building(int id, String name, double latitude, double longitude){
          this.id = id;
@@ -54,7 +58,23 @@ package com.example.firebaselogin.classes;
      public void setRiskFactor(int riskFactor) {
          this.riskFactor = riskFactor;
      }
-     // TO IMPLEMENT
+    public List<User> getPresentUsers() {
+        return presentUsers;
+    }
+
+    public void setPresentUsers(List<User> presentUsers) {
+        this.presentUsers = presentUsers;
+    }
+
+    public List<User> getUsersInPast3Days() {
+        return usersInPast3Days;
+    }
+
+    public void setUsersInPast3Days(List<User> usersInPast3Days) {
+        this.usersInPast3Days = usersInPast3Days;
+    }
+
+    // TO IMPLEMENT
      public void checkIn(){}
      public void displayBuilding(){}
 

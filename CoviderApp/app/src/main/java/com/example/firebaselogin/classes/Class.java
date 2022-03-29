@@ -1,5 +1,6 @@
 package com.example.firebaselogin.classes;
 
+import com.example.firebaselogin.enums.Days;
 import com.example.firebaselogin.enums.InstructStatus;
 
 import java.util.ArrayList;
@@ -9,7 +10,7 @@ import java.util.List;
 public class Class {
     private int ID;
     private String name;
-    public Date date;
+    private Days[] days;
     private Instructor instructor;
     private List<Student> students;
     private Building building;
@@ -71,7 +72,6 @@ public class Class {
     public void setInstructStatus(InstructStatus instructStatus) {
         this.instructStatus = instructStatus;
     }
-
     public void addStudent(Student student){
         students.add(student);
     }

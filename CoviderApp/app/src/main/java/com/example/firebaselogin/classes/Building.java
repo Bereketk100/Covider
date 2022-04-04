@@ -16,6 +16,8 @@ public class Building {
      private List<User> usersInPast3Days;
      //private CollectionReference
 
+    public Building(){}
+
      public Building(int id, String name, double latitude, double longitude){
          this.id = id;
          this.name = name;

@@ -26,7 +26,7 @@ public abstract class User {
     protected Role role;
     protected Status status;
     protected Date registerDate;
-    protected List<Test> testRecords;
+    public List<Test> testRecords;
     //constructors
     User (){
     }

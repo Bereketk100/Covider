@@ -4,6 +4,7 @@ import static com.example.firebaselogin.activities.MainActivity.mUsers;
 import static com.example.firebaselogin.activities.MainActivity.numUsers;
 import static com.example.firebaselogin.activities.MainActivity.mFirestore;
 import static com.example.firebaselogin.activities.MainActivity.mUserDocRef;
+import static com.example.firebaselogin.activities.MainActivity.thisUser;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,6 +28,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
 
 public class RegisterActivity extends AppCompatActivity {
     public static final String EMAIL_KEY = "email";
@@ -122,7 +124,6 @@ public class RegisterActivity extends AppCompatActivity {
                     if(task.isSuccessful())
                     {
                         Toast.makeText(RegisterActivity.this, "User registered successfully", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(RegisterActivity.this, MainActivity.class));
                     }
                     else
                     {
@@ -161,8 +162,24 @@ public class RegisterActivity extends AppCompatActivity {
                     }
                 });
             }
-
+            //sets thisUser
             mUserDocRef = mFirestore.document("users/" + emailTxt);
+            mUserDocRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    if (!isInstruct){
+                        Student student = documentSnapshot.toObject(Student.class);
+                        thisUser = student;
+                    }
+                    else {
+                        Instructor instructor= documentSnapshot.toObject(Instructor.class);
+                        thisUser = instructor;
+                    }
+
+                }
+            });
+            //starts next activity
+            startActivity(new Intent(RegisterActivity.this, HealthFormActivity.class));
         }
     }
 }

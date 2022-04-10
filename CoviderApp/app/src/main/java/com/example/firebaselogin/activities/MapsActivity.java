@@ -4,6 +4,7 @@ import static com.example.firebaselogin.activities.MainActivity.mFirestore;
 import static com.example.firebaselogin.activities.MainActivity.mUsers;
 import static com.example.firebaselogin.activities.MainActivity.thisUser;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -123,6 +124,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             public boolean onMarkerClick(Marker marker) {
                 // on marker click we are getting the title of our marker
                 // which is clicked and displaying it in a toast message.
+                if (thisUser.getStatus() == Status.Infected) {
+                    showSnackBar(MapsActivity.this, "You are Infected, please quarantine and schedule a test!");
+                    //return false;
+                }
                 String markerName = marker.getTitle();
                 if (!visited.containsKey(markerName)) {
                     Toast.makeText(MapsActivity.this, "Clicked location is " + markerName, Toast.LENGTH_SHORT).show();
@@ -133,6 +138,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                         @Override
                         public void run() {
+                            /*
+                            if (thisUser.getStatus() == Status.Infected) {
+                                showSnackBar(MapsActivity.this, "You are Infected, please quarantine and schedule a test!");
+                            }*/
+
                             createNewContactDialog();
                             btnChekIn.setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -140,51 +150,42 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                     Log.d("BUTTON", "Check in btn pressed!");
                                     //updating list of buildings
                                     System.out.println(markerName);
-                                    //Check if user is infected
-                                    if (thisUser.getStatus() == Status.Infected){
-                                        Log.d("STATUS", "Check in btn pressed!");
-                                        Snackbar infectedBar = Snackbar.make(view, "Infected", BaseTransientBottomBar.LENGTH_LONG);
-                                        infectedBar.show();
-                                        //Context context = getApplicationContext();
-                                        //Toast.makeText(context, "You are Infected. Please quarantine and schedule a COVID-19 test!", Toast.LENGTH_LONG).show();
-                                    }
-                                    else {
-                                        if(markerName.equals("Fertitta Hall") || markerName.equals("Leavey Library") ||markerName.equals("Kaprielian Hall") || markerName.equals("Lyon Center") || markerName.equals("Leventhal School of Accounting")) {
-                                            Toast.makeText(MapsActivity.this, "Form Required!", Toast.LENGTH_SHORT).show();
-                                            startActivity(new Intent(MapsActivity.this, BuildingQuestion.class));
-                                        } else {
-                                            CollectionReference buildingsRef = mFirestore.collection("buildings");
-                                            //query for specific building
-                                            Query buildingQuery = buildingsRef.whereEqualTo("name", markerName);
-                                            //execute query
-                                            buildingQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                                @Override
-                                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                                    if (task.isSuccessful()) {
-                                                        for (QueryDocumentSnapshot document : task.getResult()) {
-                                                            Log.d("QUERY", document.getId() + " => " + document.getData());
-                                                            DocumentReference docRef = document.getReference();
 
-                                                            Date d = new Date();
-                                                            docRef.collection("presentUsers").document(d.toString()).set(thisUser).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                                @Override
-                                                                public void onSuccess(Void unused) {
-                                                                    Log.d("ADD", "Student Document has been saved!");
-                                                                }
-                                                            }).addOnFailureListener(new OnFailureListener() {
-                                                                @Override
-                                                                public void onFailure(@NonNull Exception e) {
-                                                                    Log.d("ADD", "Document was not saved", e);
-                                                                }
-                                                            });
+                                    if(markerName.equals("Fertitta Hall") || markerName.equals("Leavey Library") ||markerName.equals("Kaprielian Hall") || markerName.equals("Lyon Center") || markerName.equals("Leventhal School of Accounting")) {
+                                        Toast.makeText(MapsActivity.this, "Form Required!", Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(MapsActivity.this, BuildingQuestion.class));
+                                    } else {
+                                        CollectionReference buildingsRef = mFirestore.collection("buildings");
+                                        //query for specific building
+                                        Query buildingQuery = buildingsRef.whereEqualTo("name", markerName);
+                                        //execute query
+                                        buildingQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                                if (task.isSuccessful()) {
+                                                    for (QueryDocumentSnapshot document : task.getResult()) {
+                                                        Log.d("QUERY", document.getId() + " => " + document.getData());
+                                                        DocumentReference docRef = document.getReference();
 
-                                                        }
-                                                    } else {
-                                                        Log.d("QUERY", "Error getting documents: ", task.getException());
+                                                        Date d = new Date();
+                                                        docRef.collection("presentUsers").document(d.toString()).set(thisUser).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                            @Override
+                                                            public void onSuccess(Void unused) {
+                                                                Log.d("ADD", "Student Document has been saved!");
+                                                            }
+                                                        }).addOnFailureListener(new OnFailureListener() {
+                                                            @Override
+                                                            public void onFailure(@NonNull Exception e) {
+                                                                Log.d("ADD", "Document was not saved", e);
+                                                            }
+                                                        });
                                                     }
+                                                } else {
+                                                    Log.d("QUERY", "Error getting documents: ", task.getException());
                                                 }
-                                            });
-                                        }
+                                            }
+                                        });
+
                                     }
                                     //restarts activity
                                     startActivity(new Intent(MapsActivity.this, MapsActivity.class));
@@ -245,6 +246,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         startActivity(new Intent(MapsActivity.this, MainActivity.class));
     }
 
+    public void showSnackBar(Activity activity, String message){
+        View rootView = activity.getWindow().getDecorView().findViewById(android.R.id.content);
+        Snackbar.make(rootView, message, 1000).show();
+    }
 
     public void fetchProf(){
         startActivity(new Intent(MapsActivity.this, ProfileActivity.class));
@@ -304,24 +309,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
     public void createNewContactDialog(){
-        dialogBuilder = new AlertDialog.Builder(this);
-        final View popup = getLayoutInflater().inflate(R.layout.activity_popup, null);
-        btnChekIn = popup.findViewById(R.id.checkIn);
-        btnViewRisk = popup.findViewById(R.id.viewRisk);
-        btnViewStats = popup.findViewById(R.id.viewStats);
-        back = popup.findViewById(R.id.back);
-        // show the popup window
-        dialogBuilder.setView(popup);
-        dialog = dialogBuilder.create();
-        dialog.show();
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-            }
-        });
-
-
+            dialogBuilder = new AlertDialog.Builder(this);
+            final View popup = getLayoutInflater().inflate(R.layout.activity_popup, null);
+            btnChekIn = popup.findViewById(R.id.checkIn);
+            btnViewRisk = popup.findViewById(R.id.viewRisk);
+            btnViewStats = popup.findViewById(R.id.viewStats);
+            back = popup.findViewById(R.id.back);
+            // show the popup window
+            dialogBuilder.setView(popup);
+            dialog = dialogBuilder.create();
+            dialog.show();
+            back.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dialog.dismiss();
+                }
+            });
     }
     private void createRiskPopup() {
         dialogBuilder = new AlertDialog.Builder(this);

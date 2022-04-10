@@ -34,6 +34,8 @@ import com.example.firebaselogin.classes.MySingleton;
 import com.example.firebaselogin.classes.Test;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.messaging.FirebaseMessaging;
 import static com.example.firebaselogin.activities.MainActivity.thisUser;
@@ -173,28 +175,39 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 test.setDate(dateParser(getDate()));
+                sendToCloseContacts();
                 thisUser.userAddTest(test);
-                TOPIC = "/topics/users";
-                NOTIFICATION_TITLE = "NEW POSITIVE COVID CASE";
-                NOTIFICATION_MESSAGE = thisUser.getName() + " tested positive for covid-19";
-                JSONObject notification = new JSONObject();
-                JSONObject notifcationBody = new JSONObject();
-                try {
-                    notifcationBody.put("title", NOTIFICATION_TITLE);
-                    notifcationBody.put("message", NOTIFICATION_MESSAGE);
 
-                    notification.put("to", TOPIC);
-                    notification.put("data", notifcationBody);
-                } catch (JSONException e) {
-                    Log.e(TAG, "onCreate: " + e.getMessage() );
-                }
-                sendNotification(notification);
                 popupWindow.dismiss();
             }
         });
         // which view you pass in doesn't matter, it is only used for the window token
         popupWindow.showAtLocation(v, Gravity.CENTER, 0, 0);
         // dismiss the popup window when touched
+    }
+    private void sendToCloseContacts(){
+        // get the buildings that this user checked int 3 days prior to positive test date
+        // get the time that this user checked into each of these buildings
+        // iterate through the users that checked into these buildings within 30 min of infected date/time
+        // get the user_id of this "close contact"
+        // set topic to
+        // TOPIC = "/topics/user_id"
+        //send notification to this user
+        TOPIC = "/topics/";
+        NOTIFICATION_TITLE = "NEW POSITIVE COVID CASE";
+        NOTIFICATION_MESSAGE = thisUser.getName() + " tested positive for covid-19";
+        JSONObject notification = new JSONObject();
+        JSONObject notifcationBody = new JSONObject();
+        try {
+            notifcationBody.put("title", NOTIFICATION_TITLE);
+            notifcationBody.put("message", NOTIFICATION_MESSAGE);
+
+            notification.put("to", TOPIC);
+            notification.put("data", notifcationBody);
+        } catch (JSONException e) {
+            Log.e(TAG, "onCreate: " + e.getMessage() );
+        }
+        sendNotification(notification);
     }
     public String getDate(){
         return editTestDate.getText().toString().trim();

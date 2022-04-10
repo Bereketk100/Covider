@@ -16,12 +16,16 @@ import android.widget.Toast;
 
 import com.example.firebaselogin.R;
 import com.example.firebaselogin.classes.Student;
+import com.example.firebaselogin.notifications.MessagingService;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.installations.FirebaseInstallations;
+import com.google.firebase.installations.InstallationTokenResult;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import static com.example.firebaselogin.activities.MainActivity.mFirestore;
@@ -57,7 +61,8 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
-            }        });    }
+            }        });
+    }
 
     private void login()
     {
@@ -104,4 +109,24 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.makeText(LoginActivity.this, "Login Failed"+task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }
-            });        }    } }
+            });
+        }
+        FirebaseUser fbuser = FirebaseAuth.getInstance().getCurrentUser();
+        if(fbuser != null){
+            String uid = fbuser.getUid();
+            //subscribe them to topic under their user_id
+            FirebaseMessaging.getInstance().subscribeToTopic(uid)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            String msg = "subscribed " + uid;
+                            if (!task.isSuccessful()) {
+                                msg = "failed to subscribe";
+                            }
+                            Log.d(TAG, msg);
+                            Toast.makeText(LoginActivity.this, msg, Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        }
+    }
+}

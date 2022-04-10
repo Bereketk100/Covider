@@ -27,12 +27,17 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.installations.FirebaseInstallations;
+import com.google.firebase.installations.InstallationTokenResult;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 public class RegisterActivity extends AppCompatActivity {
     public static final String EMAIL_KEY = "email";
     public static final String NAME_KEY = "name";
     public static final String USERNAME_KEY = "username";
     public static final String PASSWORD_KEY = "password";
+    public static final String TOKEN_KEY = "token";
     public static final String TAG = "User";
     //document instance to save to firestore
     private FirebaseAuth mAuth;
@@ -59,7 +64,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         textLogin = findViewById(R.id.text_login);
         numUsers++;
-        //btn listeneres
+        //btn listeners
         btnStudent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -163,6 +168,23 @@ public class RegisterActivity extends AppCompatActivity {
             }
 
             mUserDocRef = mFirestore.document("users/" + emailTxt);
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            if(user != null){
+                String uid = user.getUid();
+                //subscribe them to topic under their user_id
+                FirebaseMessaging.getInstance().subscribeToTopic(uid)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                String msg = "subscribed";
+                                if (!task.isSuccessful()) {
+                                    msg = "failed to subscribe";
+                                }
+                                Log.d(TAG, msg);
+                                Toast.makeText(RegisterActivity.this, msg, Toast.LENGTH_SHORT).show();
+                            }
+                        });
+            }
         }
     }
 }

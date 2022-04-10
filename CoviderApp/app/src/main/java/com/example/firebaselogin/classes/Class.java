@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Class {
-    private int ID;
+    private int ID, section;
     private String name;
     private Days[] days;
     private Instructor instructor;
@@ -16,11 +16,12 @@ public class Class {
     private InstructStatus instructStatus;
 
     //constructors
-    public Class(String name, Instructor instructor, Building building, InstructStatus instructStatus){
+    public Class(String name, Instructor instructor, Building building, InstructStatus instructStatus, int section){
         this.name = name;
         this.instructor = instructor;
         this.building = building;
         this.instructStatus = instructStatus;
+        this.section = section;
 
         students = new ArrayList<>();
     }

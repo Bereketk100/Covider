@@ -26,6 +26,7 @@ public abstract class User {
     protected Role role;
     protected Status status;
     protected Date registerDate;
+    public Schedule schedule;
     public List<Test> testRecords;
     //constructors
     User (){
@@ -106,6 +107,13 @@ public abstract class User {
         this.registerDate = registerDate;
     }
 
+    public Schedule getSchedule() {
+        return schedule;
+    }
+
+    public void setSchedule(Schedule schedule) {
+        this.schedule = schedule;
+    }
     //methods
     public void userAddTest(Test test){
         //adding Firestore document to user subcollection testRecords

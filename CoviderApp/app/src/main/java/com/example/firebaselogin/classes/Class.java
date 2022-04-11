@@ -7,8 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Class {
-    private int ID, section;
-    private String name;
+    private int ID;
+    private int section;
+
+    private int classNum;
+
+    private String dpt;
     private Days[] days;
     private Instructor instructor;
     private List<Student> students;
@@ -16,8 +20,8 @@ public class Class {
     private InstructStatus instructStatus;
 
     //constructors
-    public Class(String name, Instructor instructor, Building building, InstructStatus instructStatus, int section){
-        this.name = name;
+    public Class(String dpt, Instructor instructor, Building building, InstructStatus instructStatus, int section){
+        this.dpt = dpt;
         this.instructor = instructor;
         this.building = building;
         this.instructStatus = instructStatus;
@@ -33,12 +37,28 @@ public class Class {
         this.ID = ID;
     }
 
-    public String getName() {
-        return name;
+    public int getClassNum() {
+        return classNum;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setClassNum(int classNum) {
+        this.classNum = classNum;
+    }
+
+    public String getDpt() {
+        return dpt;
+    }
+
+    public void setDpt(String dpt) {
+        this.dpt = dpt;
+    }
+
+    public int getSection() {
+        return section;
+    }
+
+    public void setSection(int section) {
+        this.section = section;
     }
 
     public Instructor getInstructor() {

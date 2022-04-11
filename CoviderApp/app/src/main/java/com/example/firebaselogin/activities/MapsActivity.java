@@ -61,7 +61,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private Button btnChekIn, btnViewRisk, btnViewStats, back, riskDone;
     private FirebaseAuth mAuth;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -341,7 +340,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 dialog.dismiss();
             }
         });
-
 
     }
 

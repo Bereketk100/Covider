@@ -14,27 +14,12 @@ public class Instructor extends User{
         role = Role.Instructor;
     }
     //class specific
-    /*
-    @Override
-    public void userAddTest(Test test){
+    public String getLastName(){
+        String words[] = new String[2];
+        words = name.split(" ");
 
-        CollectionReference mRecords = mUsers.collection("instructors").document(email).collection("testRecords");
-        mRecords.document(test.getDate().toString()).set(test).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void unused) {
-                Log.d(TAG, "Document has been saved!"); }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.w(TAG, "Document was not saved", e);
-            }
-        });
-
-        if (testRecords == null){
-            testRecords = new ArrayList<>();
-        }
-        testRecords.add(test);
-    }*/
+        return words[1];
+    }
     public void changeInstructStatus(InstructStatus instructStatus){
         this.instructStatus = instructStatus;
     }

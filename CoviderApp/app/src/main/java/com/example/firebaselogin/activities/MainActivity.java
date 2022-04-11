@@ -70,8 +70,6 @@ public class MainActivity extends AppCompatActivity {
                 displayMap();
             }
         });
-
-
     }
 
     @Override
@@ -107,7 +105,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void fetchProf(){
         startActivity(new Intent(MainActivity.this, ProfileActivity.class));
-        //maybe add onFailureListener
     }
 
     public void schedule(){startActivity(new Intent(MainActivity.this, ScheduleActivity.class));}

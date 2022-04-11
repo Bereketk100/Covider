@@ -68,7 +68,7 @@
         android:background="@drawable/border"
         android:drawableLeft="@drawable/username"
         android:fontFamily="@font/abel"
-        android:hint="  Name"
+        android:hint="Name"
         android:paddingLeft="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

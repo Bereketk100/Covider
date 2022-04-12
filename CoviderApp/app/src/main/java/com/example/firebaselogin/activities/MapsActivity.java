@@ -5,7 +5,6 @@ import static com.example.firebaselogin.activities.MainActivity.mUsers;
 import static com.example.firebaselogin.activities.MainActivity.thisUser;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -22,7 +21,6 @@ import com.example.firebaselogin.R;
 import com.example.firebaselogin.classes.USCMap;
 import com.example.firebaselogin.classes.User;
 import com.example.firebaselogin.databinding.ActivityMapsBinding;
-import com.example.firebaselogin.enums.Status;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -35,8 +33,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.snackbar.BaseTransientBottomBar;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
@@ -140,30 +136,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                     Log.d("BUTTON", "Check in btn pressed!");
                                     //updating list of buildings
                                     System.out.println(markerName);
-                                    //Check if user is infected
-                                    if (thisUser.getStatus() == Status.Infected){
-                                        Log.d("STATUS", "Check in btn pressed!");
-                                        Snackbar infectedBar = Snackbar.make(view, "Infected", BaseTransientBottomBar.LENGTH_LONG);
-                                        infectedBar.show();
-                                        //Context context = getApplicationContext();
-                                        //Toast.makeText(context, "You are Infected. Please quarantine and schedule a COVID-19 test!", Toast.LENGTH_LONG).show();
-                                    }
-                                    else {
-                                        if(markerName.equals("Fertitta Hall") || markerName.equals("Leavey Library") ||markerName.equals("Kaprielian Hall") || markerName.equals("Lyon Center") || markerName.equals("Leventhal School of Accounting")) {
-                                            Toast.makeText(MapsActivity.this, "Form Required!", Toast.LENGTH_SHORT).show();
-                                            startActivity(new Intent(MapsActivity.this, BuildingQuestion.class));
-                                        } else {
-                                            CollectionReference buildingsRef = mFirestore.collection("buildings");
-                                            //query for specific building
-                                            Query buildingQuery = buildingsRef.whereEqualTo("name", markerName);
-                                            //execute query
-                                            buildingQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                                @Override
-                                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                                    if (task.isSuccessful()) {
-                                                        for (QueryDocumentSnapshot document : task.getResult()) {
-                                                            Log.d("QUERY", document.getId() + " => " + document.getData());
-                                                            DocumentReference docRef = document.getReference();
+                                    if(markerName.equals("Fertitta Hall") || markerName.equals("Leavey Library") ||markerName.equals("Kaprielian Hall") || markerName.equals("Lyon Center") || markerName.equals("Leventhal School of Accounting")) {
+                                        Toast.makeText(MapsActivity.this, "Form Required!", Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(MapsActivity.this, BuildingQuestion.class));
+                                    } else {
+                                        CollectionReference buildingsRef = mFirestore.collection("buildings");
+                                        //query for specific building
+                                        Query buildingQuery = buildingsRef.whereEqualTo("name", markerName);
+                                        //execute query
+                                        buildingQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                                if (task.isSuccessful()) {
+                                                    for (QueryDocumentSnapshot document : task.getResult()) {
+                                                        Log.d("QUERY", document.getId() + " => " + document.getData());
+                                                        DocumentReference docRef = document.getReference();
 
                                                             Date d = new Date();
                                                             docRef.collection("presentUsers").document(d.toString()).set(thisUser).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -178,17 +165,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                                                 }
                                                             });
 
-                                                        }
-                                                    } else {
-                                                        Log.d("QUERY", "Error getting documents: ", task.getException());
                                                     }
+                                                } else {
+                                                    Log.d("QUERY", "Error getting documents: ", task.getException());
                                                 }
-                                            });
-                                        }
-                                    }
-                                    //restarts activity
-                                    startActivity(new Intent(MapsActivity.this, MapsActivity.class));
+                                            }
+                                        });
 
+                                        startActivity(new Intent(MapsActivity.this, MapsActivity.class));
+
+                                    }
 
                                 }
                             });

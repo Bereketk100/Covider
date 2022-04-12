@@ -22,7 +22,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
-    private Button btnLogout, btnprof, btnMap, btnSchedule;
+    private Button btnLogout, btnprof, btnMap;
     private FirebaseAnalytics analytics = FirebaseAnalytics.getInstance(this);
 
     public static FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
@@ -39,13 +39,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mAuth = FirebaseAuth.getInstance();
         btnLogout = findViewById(R.id.btnlogout);
-        btnSchedule = findViewById(R.id.btnSchedule);
-        btnSchedule.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                schedule();
-            }
-        });
         btnLogout.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -109,8 +102,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(MainActivity.this, ProfileActivity.class));
         //maybe add onFailureListener
     }
-
-    public void schedule(){startActivity(new Intent(MainActivity.this, ScheduleActivity.class));}
 
     public void displayMap(){
         startActivity(new Intent(MainActivity.this, MapsActivity.class));

@@ -54,7 +54,7 @@ public class ProfileActivity extends AppCompatActivity {
     String NOTIFICATION_TITLE;
     String NOTIFICATION_MESSAGE;
     String TOPIC;
-    private Button btnHome, btnAddTest, btnEditSchedule;
+    private Button btnHome, btnAddTest;
     private static FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
     private TextView mNameView, mEmailView, mUserView, mPassView, mStatusView;
 

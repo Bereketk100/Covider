@@ -32,7 +32,7 @@ public class Building {
          return longitude;
      }
 
-     public void setLongitude(int longitude) {
+     public void setLongitude(double longitude) {
          this.longitude = longitude;
      }
 
@@ -40,7 +40,7 @@ public class Building {
          return latitude;
      }
 
-     public void setLatitude(int latitude) {
+     public void setLatitude(double latitude) {
          this.latitude = latitude;
      }
 

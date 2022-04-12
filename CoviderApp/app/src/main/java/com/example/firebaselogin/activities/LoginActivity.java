@@ -82,8 +82,6 @@ public class LoginActivity extends AppCompatActivity {
                     {
                         //sets mUserDocRef and thisUser upon successful login
                         Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                        //log in debug
-                        Log.d("LOGIN", "Successful Login");
                         FirebaseMessaging.getInstance().subscribeToTopic("users")
                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
@@ -108,7 +106,6 @@ public class LoginActivity extends AppCompatActivity {
                     }
                     else
                     {
-                        Log.d("LOGIN", "Login failed");
                         Toast.makeText(LoginActivity.this, "Login Failed"+task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }

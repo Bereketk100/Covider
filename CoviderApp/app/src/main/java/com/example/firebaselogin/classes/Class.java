@@ -20,6 +20,7 @@ public class Class {
     private InstructStatus instructStatus;
 
     //constructors
+    public Class(){}
     public Class(String dpt, Instructor instructor, Building building, InstructStatus instructStatus, int section){
         this.dpt = dpt;
         this.instructor = instructor;

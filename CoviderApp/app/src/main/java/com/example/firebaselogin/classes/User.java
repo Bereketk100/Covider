@@ -41,6 +41,7 @@ public abstract class User {
         registerDate = new Date();
         status = Status.Healthy;
         testRecords = new ArrayList<>();
+        schedule = new Schedule();
     }
     //getters/setters
     public int getUserID() {

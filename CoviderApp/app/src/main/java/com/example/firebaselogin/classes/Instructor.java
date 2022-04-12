@@ -24,7 +24,9 @@ public class Instructor extends User{
         this.instructStatus = instructStatus;
     }
     public void checkClassHealth(){
-
+        for (Class c : schedule.getSchedule()){
+            
+        }
     }
 
 }

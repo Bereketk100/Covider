@@ -36,7 +36,6 @@ public abstract class User {
         name = name_;
         username = username_;
         password = password_;
-
         registerDate = new Date();
         status = Status.Healthy;
         testRecords = new ArrayList<>();

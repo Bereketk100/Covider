@@ -1,7 +1,9 @@
 package com.example.firebaselogin.classes;
 
 import static android.content.ContentValues.TAG;
+import static com.example.firebaselogin.activities.MainActivity.mUserDocRef;
 import static com.example.firebaselogin.activities.MainActivity.mUsers;
+import static com.example.firebaselogin.activities.MainActivity.thisUser;
 
 import android.util.Log;
 
@@ -124,6 +126,19 @@ public abstract class User {
             testRecords = new ArrayList<>();
         }
         testRecords.add(test);
+    }
+    public void updateStatus(){
+        mUserDocRef.update("status", status).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                Log.d("UPDATE", "Updated user status");
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d("UPDATE", "Failed to update user status");
+            }
+        });
     }
 
 

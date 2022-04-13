@@ -309,6 +309,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
     }
+    public void calcRisk(){
+        //query buiding for infected users
+    }
     private void createRiskPopup() {
         dialogBuilder = new AlertDialog.Builder(this);
         final View popup = getLayoutInflater().inflate(R.layout.view_risk_factor, null);
@@ -324,8 +327,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 dialog.dismiss();
             }
         });
-
-
     }
+
 
 }

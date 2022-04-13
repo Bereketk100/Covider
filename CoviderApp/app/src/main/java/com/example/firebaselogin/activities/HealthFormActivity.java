@@ -218,10 +218,10 @@ public class HealthFormActivity extends AppCompatActivity {
         btnNext = (Button)findViewById(R.id.btnNext);
     }
     public void returnHome(){
-
+        //infected case
         if (symptom1 || symptom2 || symptom3 || symptom4 || symptom5 || symptom6 || symptom7){
             thisUser.setStatus(Status.Infected);
-            mUserDocRef.update("Status", Status.Infected).addOnSuccessListener(new OnSuccessListener<Void>() {
+            mUserDocRef.update("status", Status.Infected).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {
                     Log.d(TAG, "DocumentSnapshot successfully updated!");
@@ -234,9 +234,10 @@ public class HealthFormActivity extends AppCompatActivity {
                         }
                     });
         }
+        //healthy case
         else {
             thisUser.setStatus(Status.Healthy);
-            mUserDocRef.update("status", Status.Infected).addOnSuccessListener(new OnSuccessListener<Void>() {
+            mUserDocRef.update("status", Status.Healthy).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {
                     Log.d(TAG, "DocumentSnapshot successfully updated!");

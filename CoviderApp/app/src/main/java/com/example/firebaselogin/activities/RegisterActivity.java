@@ -4,6 +4,7 @@ import static com.example.firebaselogin.activities.MainActivity.mUsers;
 import static com.example.firebaselogin.activities.MainActivity.numUsers;
 import static com.example.firebaselogin.activities.MainActivity.mFirestore;
 import static com.example.firebaselogin.activities.MainActivity.mUserDocRef;
+import static com.example.firebaselogin.activities.MainActivity.thisUser;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,17 +28,13 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.installations.FirebaseInstallations;
-import com.google.firebase.installations.InstallationTokenResult;
-import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.firestore.DocumentSnapshot;
 
 public class RegisterActivity extends AppCompatActivity {
     public static final String EMAIL_KEY = "email";
     public static final String NAME_KEY = "name";
     public static final String USERNAME_KEY = "username";
     public static final String PASSWORD_KEY = "password";
-    public static final String TOKEN_KEY = "token";
     public static final String TAG = "User";
     //document instance to save to firestore
     private FirebaseAuth mAuth;
@@ -64,7 +61,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         textLogin = findViewById(R.id.text_login);
         numUsers++;
-        //btn listeners
+        //btn listeneres
         btnStudent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -127,7 +124,6 @@ public class RegisterActivity extends AppCompatActivity {
                     if(task.isSuccessful())
                     {
                         Toast.makeText(RegisterActivity.this, "User registered successfully", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(RegisterActivity.this, MainActivity.class));
                     }
                     else
                     {
@@ -166,25 +162,24 @@ public class RegisterActivity extends AppCompatActivity {
                     }
                 });
             }
-
+            //sets thisUser
             mUserDocRef = mFirestore.document("users/" + emailTxt);
-            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-            if(user != null){
-                String uid = user.getUid();
-                //subscribe them to topic under their user_id
-                FirebaseMessaging.getInstance().subscribeToTopic(uid)
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                String msg = "subscribed";
-                                if (!task.isSuccessful()) {
-                                    msg = "failed to subscribe";
-                                }
-                                Log.d(TAG, msg);
-                                Toast.makeText(RegisterActivity.this, msg, Toast.LENGTH_SHORT).show();
-                            }
-                        });
-            }
+            mUserDocRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    if (!isInstruct){
+                        Student student = documentSnapshot.toObject(Student.class);
+                        thisUser = student;
+                    }
+                    else {
+                        Instructor instructor= documentSnapshot.toObject(Instructor.class);
+                        thisUser = instructor;
+                    }
+
+                }
+            });
+            //starts next activity
+            startActivity(new Intent(RegisterActivity.this, HealthFormActivity.class));
         }
     }
 }

@@ -13,13 +13,20 @@ public class Instructor extends User{
         super(userID, email, name, username, password);
         role = Role.Instructor;
     }
+    //class specific
+    public String getLastName(){
+        String words[] = new String[2];
+        words = name.split(" ");
 
+        return words[1];
+    }
     public void changeInstructStatus(InstructStatus instructStatus){
         this.instructStatus = instructStatus;
     }
-
     public void checkClassHealth(){
-
+        for (Class c : schedule.getSchedule()){
+            
+        }
     }
 
 }

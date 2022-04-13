@@ -16,12 +16,13 @@ public class Class {
     private InstructStatus instructStatus;
 
     //constructors
+    public Class(){}
+
     public Class(String name, Instructor instructor, Building building, InstructStatus instructStatus){
         this.name = name;
         this.instructor = instructor;
         this.building = building;
         this.instructStatus = instructStatus;
-
         students = new ArrayList<>();
     }
     public int getID() {

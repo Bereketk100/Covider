@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<testsuite name="com.example.firebaselogin.LoginActivityTest" tests="1" failures="1" errors="0" skipped="0" time="0.996" timestamp="2022-04-13T23:17:46" hostname="localhost">
+  <properties>
+    <property name="device" value="emulator-5554(AVD) - 8.1.0" />
+    <property name="flavor" value="" />
+    <property name="project" value="app" />
+  </properties>
+  <testcase name="checkLoginSuccess" classname="com.example.firebaselogin.LoginActivityTest" time="0.639">
+    <failure>androidx.test.espresso.NoActivityResumedException: No activities found. Did you forget to launch the activity by calling getActivity() or startActivitySync or similar?
+at dalvik.system.VMStack.getThreadStackTrace(Native Method)
+at java.lang.Thread.getStackTrace(Thread.java:1538)
+at androidx.test.espresso.base.DefaultFailureHandler.getUserFriendlyError(DefaultFailureHandler.java:12)
+at androidx.test.espresso.base.DefaultFailureHandler.handle(DefaultFailureHandler.java:7)
+at androidx.test.espresso.ViewInteraction.waitForAndHandleInteractionResults(ViewInteraction.java:8)
+at androidx.test.espresso.ViewInteraction.desugaredPerform(ViewInteraction.java:11)
+at androidx.test.espresso.ViewInteraction.perform(ViewInteraction.java:4)
+at com.example.firebaselogin.LoginActivityTest.checkLoginSuccess(LoginActivityTest.java:25)</failure>
+  </testcase>
+</testsuite>

@@ -36,7 +36,7 @@ public class HealthFormActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_health_form);
-        //initalize buttons
+        //initialize buttons
         initButtons();
 
         btn1Yes.setOnClickListener(new View.OnClickListener() {

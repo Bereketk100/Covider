@@ -137,10 +137,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                         @Override
                         public void run() {
-                            /*
-                            if (thisUser.getStatus() == Status.Infected) {
-                                showSnackBar(MapsActivity.this, "You are Infected, please quarantine and schedule a test!");
-                            }*/
 
                             createNewContactDialog();
                             btnChekIn.setOnClickListener(new View.OnClickListener() {

@@ -15,11 +15,6 @@ public class ClassTest extends TestCase {
         assertEquals("Testing setter/getter", 10, c.getID());
     }
 
-    public void testTestSetAndGetName() {
-        c.setName("CS310");
-        assertEquals("Testing setter/getter", "CS310", c.getName());
-    }
-
 
     public void testSetAndGetInstructor() {
         Instructor instructor = new Instructor();

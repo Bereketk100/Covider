@@ -22,6 +22,9 @@ public class Instructor extends User{
     }
     public void changeInstructStatus(InstructStatus instructStatus){
         this.instructStatus = instructStatus;
+        for (Class c: schedule.getSchedule()){
+            c.setInstructStatus(instructStatus);
+        }
     }
     public void checkClassHealth(){
         for (Class c : schedule.getSchedule()){

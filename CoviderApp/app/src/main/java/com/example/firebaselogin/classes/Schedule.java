@@ -34,6 +34,14 @@ public class Schedule {
         this.schedule = schedule;
     }
     //class specific methods
+    public boolean classExists(Class c){
+        for (Class search: schedule){
+            if (c == search){
+                return true;
+            }
+        }
+        return false;
+    }
     public void addClass(Class c){
         //adding Firestore document to user subcollection testRecords
         CollectionReference mSchedule = mUserDocRef.collection("schedule");
@@ -50,23 +58,17 @@ public class Schedule {
 
 
         schedule.add(c);
-        /*
-
-        scheduleCollection.document(c.getDpt()).collection(Integer.toString(c.getClassNum()))
-                .document(c.getInstructor().getLastName()).collection("sections").document(Integer.toString(c.getSection()));
-        scheduleCollection.document(c.getDpt()).set(c).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void unused) {
-                Log.d("SCHEDULE", "Added class");
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.d("SCHEDULE", "Failed to add class");
-            }
-        });*/
-
     }
+    public Class getClass(Class c){
+        for (Class search: schedule){
+            if (c == search){
+                return search;
+            }
+        }
+        return null;
+    }
+
+
 
 
 

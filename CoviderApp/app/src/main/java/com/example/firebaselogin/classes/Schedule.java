@@ -36,15 +36,16 @@ public class Schedule {
     //class specific methods
     public void addClass(Class c){
         //adding Firestore document to user subcollection testRecords
+        schedule.add(c);
         CollectionReference mSchedule = mUserDocRef.collection("schedule");
         mSchedule.document("dummyClass").set(c).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
-                Log.d(TAG, "Document has been saved!"); }
+                Log.d("SCHEDULE", "Document has been saved!"); }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Log.w(TAG, "Document was not saved", e);
+                Log.w("SCHEDULE", "Document was not saved", e);
             }
         });
 

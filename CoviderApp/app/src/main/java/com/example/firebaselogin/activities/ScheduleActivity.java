@@ -19,6 +19,7 @@ import com.example.firebaselogin.R;
 import com.example.firebaselogin.classes.Building;
 import com.example.firebaselogin.classes.Class;
 import com.example.firebaselogin.classes.Instructor;
+import com.example.firebaselogin.classes.Schedule;
 import com.example.firebaselogin.enums.InstructStatus;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -72,6 +73,10 @@ public class ScheduleActivity extends AppCompatActivity {
                 Instructor instructor = new Instructor();
                 Building b = new Building();
                 Class c = new Class("CSCI",instructor, b, InstructStatus.Hybrid, 1);
+                if (thisUser.getSchedule() == null){
+                    Schedule s = new Schedule();
+                    thisUser.setSchedule(s);
+                }
                 thisUser.getSchedule().addClass(c);
             }
         }).addOnFailureListener(new OnFailureListener() {

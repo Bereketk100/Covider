@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.firebaselogin" >
+    package="com.example.firebaselogin">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
@@ -13,27 +12,20 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Firebaselogin"
-        tools:ignore="ExtraText" >
+        android:requestLegacyExternalStorage="true"
+        android:theme="@style/Theme.Firebaselogin">
 
-        <!-- Set custom default icon. This is used when no icon is set for incoming notification messages.
-     See README(https://goo.gl/l4GJaQ) for more. -->
-        <meta-data
-            android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@drawable/usclogo" />
-        <!-- Set color used with incoming notification messages. This is used when no color is set for the incoming
-             notification message. See README(https://goo.gl/6BKBk7) for more. -->
-        <meta-data
-            android:name="com.google.firebase.messaging.default_notification_color"
-            android:resource="@color/purple_500" />
+        <activity
+            android:name=".activities.ScheduleActivity"
+            android:exported="false" />
 
         <service
-            android:name=".notifications.MessagingService"
-            android:permission="com.google.android.c2dm.permission.SEND"
-            android:exported="false">
+            android:name=".MyFirebaseMessagingService"
+            android:exported="false"
+            android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
-                <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
             </intent-filter>
         </service>
 
@@ -57,7 +49,7 @@
 
         <activity
             android:name=".activities.LoginActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -79,7 +71,7 @@
             android:exported="false" />
         <activity
             android:name=".activities.MainActivity"
-            android:exported="true" >
+            android:exported="true">
             android:name=".MainActivity"
             android:exported="true" >
             <intent-filter>

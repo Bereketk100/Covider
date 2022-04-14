@@ -1,7 +1,9 @@
 package com.example.firebaselogin.classes;
 
 import static android.content.ContentValues.TAG;
+import static com.example.firebaselogin.activities.MainActivity.mUserDocRef;
 import static com.example.firebaselogin.activities.MainActivity.mUsers;
+import static com.example.firebaselogin.activities.MainActivity.thisUser;
 
 import android.util.Log;
 
@@ -26,6 +28,7 @@ public abstract class User {
     protected Role role;
     protected Status status;
     protected Date registerDate;
+    public Schedule schedule;
     public List<Test> testRecords;
     //constructors
     User (){
@@ -36,10 +39,10 @@ public abstract class User {
         name = name_;
         username = username_;
         password = password_;
-
         registerDate = new Date();
         status = Status.Healthy;
         testRecords = new ArrayList<>();
+        schedule = new Schedule();
     }
     //getters/setters
     public int getUserID() {
@@ -106,6 +109,13 @@ public abstract class User {
         this.registerDate = registerDate;
     }
 
+    public Schedule getSchedule() {
+        return schedule;
+    }
+
+    public void setSchedule(Schedule schedule) {
+        this.schedule = schedule;
+    }
     //methods
     public void userAddTest(Test test){
         //adding Firestore document to user subcollection testRecords
@@ -125,6 +135,19 @@ public abstract class User {
             testRecords = new ArrayList<>();
         }
         testRecords.add(test);
+    }
+    public void updateStatus(){
+        mUserDocRef.update("status", status).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                Log.d("UPDATE", "Updated user status");
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d("UPDATE", "Failed to update user status");
+            }
+        });
     }
 
 

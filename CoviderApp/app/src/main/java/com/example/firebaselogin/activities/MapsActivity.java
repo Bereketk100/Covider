@@ -4,7 +4,9 @@ import static com.example.firebaselogin.activities.MainActivity.mFirestore;
 import static com.example.firebaselogin.activities.MainActivity.mUsers;
 import static com.example.firebaselogin.activities.MainActivity.thisUser;
 
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -21,6 +23,7 @@ import com.example.firebaselogin.R;
 import com.example.firebaselogin.classes.USCMap;
 import com.example.firebaselogin.classes.User;
 import com.example.firebaselogin.databinding.ActivityMapsBinding;
+import com.example.firebaselogin.enums.Status;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -33,6 +36,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
@@ -55,7 +60,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private AlertDialog dialog;
     private Button btnChekIn, btnViewRisk, btnViewStats, back, riskDone;
     private FirebaseAuth mAuth;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,6 +123,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             public boolean onMarkerClick(Marker marker) {
                 // on marker click we are getting the title of our marker
                 // which is clicked and displaying it in a toast message.
+                if (thisUser.getStatus() == Status.Infected) {
+                    showSnackBar(MapsActivity.this, "You are Infected, please quarantine and schedule a test!");
+                    //return false;
+                }
                 String markerName = marker.getTitle();
                 if (!visited.containsKey(markerName)) {
                     Toast.makeText(MapsActivity.this, "Clicked location is " + markerName, Toast.LENGTH_SHORT).show();
@@ -129,6 +137,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                         @Override
                         public void run() {
+
                             createNewContactDialog();
                             btnChekIn.setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -136,6 +145,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                     Log.d("BUTTON", "Check in btn pressed!");
                                     //updating list of buildings
                                     System.out.println(markerName);
+
                                     if(markerName.equals("Fertitta Hall") || markerName.equals("Leavey Library") ||markerName.equals("Kaprielian Hall") || markerName.equals("Lyon Center") || markerName.equals("Leventhal School of Accounting")) {
                                         Toast.makeText(MapsActivity.this, "Form Required!", Toast.LENGTH_SHORT).show();
                                         startActivity(new Intent(MapsActivity.this, BuildingQuestion.class));
@@ -152,19 +162,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                                         Log.d("QUERY", document.getId() + " => " + document.getData());
                                                         DocumentReference docRef = document.getReference();
 
-                                                            Date d = new Date();
-                                                            docRef.collection("presentUsers").document(d.toString()).set(thisUser).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                                @Override
-                                                                public void onSuccess(Void unused) {
-                                                                    Log.d("ADD", "Student Document has been saved!");
-                                                                }
-                                                            }).addOnFailureListener(new OnFailureListener() {
-                                                                @Override
-                                                                public void onFailure(@NonNull Exception e) {
-                                                                    Log.d("ADD", "Document was not saved", e);
-                                                                }
-                                                            });
-
+                                                        Date d = new Date();
+                                                        docRef.collection("presentUsers").document(d.toString()).set(thisUser).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                            @Override
+                                                            public void onSuccess(Void unused) {
+                                                                Log.d("ADD", "Student Document has been saved!");
+                                                            }
+                                                        }).addOnFailureListener(new OnFailureListener() {
+                                                            @Override
+                                                            public void onFailure(@NonNull Exception e) {
+                                                                Log.d("ADD", "Document was not saved", e);
+                                                            }
+                                                        });
                                                     }
                                                 } else {
                                                     Log.d("QUERY", "Error getting documents: ", task.getException());
@@ -172,9 +181,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                             }
                                         });
 
-                                        startActivity(new Intent(MapsActivity.this, MapsActivity.class));
-
                                     }
+                                    //restarts activity
+                                    startActivity(new Intent(MapsActivity.this, MapsActivity.class));
+
 
                                 }
                             });
@@ -231,6 +241,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         startActivity(new Intent(MapsActivity.this, MainActivity.class));
     }
 
+    public void showSnackBar(Activity activity, String message){
+        View rootView = activity.getWindow().getDecorView().findViewById(android.R.id.content);
+        Snackbar.make(rootView, message, 1000).show();
+    }
 
     public void fetchProf(){
         startActivity(new Intent(MapsActivity.this, ProfileActivity.class));
@@ -290,24 +304,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
     public void createNewContactDialog(){
-        dialogBuilder = new AlertDialog.Builder(this);
-        final View popup = getLayoutInflater().inflate(R.layout.activity_popup, null);
-        btnChekIn = popup.findViewById(R.id.checkIn);
-        btnViewRisk = popup.findViewById(R.id.viewRisk);
-        btnViewStats = popup.findViewById(R.id.viewStats);
-        back = popup.findViewById(R.id.back);
-        // show the popup window
-        dialogBuilder.setView(popup);
-        dialog = dialogBuilder.create();
-        dialog.show();
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-            }
-        });
-
-
+            dialogBuilder = new AlertDialog.Builder(this);
+            final View popup = getLayoutInflater().inflate(R.layout.activity_popup, null);
+            btnChekIn = popup.findViewById(R.id.checkIn);
+            btnViewRisk = popup.findViewById(R.id.viewRisk);
+            btnViewStats = popup.findViewById(R.id.viewStats);
+            back = popup.findViewById(R.id.back);
+            // show the popup window
+            dialogBuilder.setView(popup);
+            dialog = dialogBuilder.create();
+            dialog.show();
+            back.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dialog.dismiss();
+                }
+            });
     }
     private void createRiskPopup() {
         dialogBuilder = new AlertDialog.Builder(this);
@@ -324,7 +336,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 dialog.dismiss();
             }
         });
-
 
     }
 

@@ -67,6 +67,7 @@ public class Building {
      public void setRiskFactor(int riskFactor) {
          this.riskFactor = riskFactor;
      }
+
     public List<User> getPresentUsers() {
         return presentUsers;
     }
@@ -89,7 +90,5 @@ public class Building {
          presentUsers.add(user);
 
      }
-     public void displayBuilding(){}
-
 
 }

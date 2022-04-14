@@ -32,6 +32,7 @@ import java.util.Map;
 
 import com.example.firebaselogin.classes.MySingleton;
 import com.example.firebaselogin.classes.Test;
+import com.example.firebaselogin.enums.Status;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -162,6 +163,7 @@ public class ProfileActivity extends AppCompatActivity {
             public void onClick(View view) {
                 test.setResult(true);
                 mStatusView.setText("Status: Infected");
+                thisUser.setStatus(Status.Infected);
             }
         });
         btnNo.setOnClickListener(new View.OnClickListener() {
@@ -169,6 +171,7 @@ public class ProfileActivity extends AppCompatActivity {
             public void onClick(View view) {
                 test.setResult(false);
                 mStatusView.setText("Status: Healthy");
+                thisUser.setStatus(Status.Healthy);
             }
         });
         btnDone.setOnClickListener(new View.OnClickListener() {
@@ -177,7 +180,7 @@ public class ProfileActivity extends AppCompatActivity {
                 test.setDate(dateParser(getDate()));
                 sendToCloseContacts();
                 thisUser.userAddTest(test);
-
+                thisUser.updateStatus();
                 popupWindow.dismiss();
             }
         });

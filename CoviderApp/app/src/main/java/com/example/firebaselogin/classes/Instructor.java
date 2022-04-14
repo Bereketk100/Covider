@@ -2,7 +2,7 @@ package com.example.firebaselogin.classes;
 
 import com.example.firebaselogin.enums.InstructStatus;
 import com.example.firebaselogin.enums.Role;
-
+//Ethan Zhang
 public class Instructor extends User{
     private InstructStatus instructStatus;
 

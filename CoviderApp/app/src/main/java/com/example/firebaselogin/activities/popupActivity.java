@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.firebaselogin.R;
 
+//Ethan Zhang
 public class popupActivity extends AppCompatActivity {
 
     @Override

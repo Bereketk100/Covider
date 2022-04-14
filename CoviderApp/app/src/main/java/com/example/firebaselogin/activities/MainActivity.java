@@ -18,6 +18,8 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+//BackEnd: Ethan Zhang
+//FrontEnd:Bereket
 
 public class MainActivity extends AppCompatActivity {
 

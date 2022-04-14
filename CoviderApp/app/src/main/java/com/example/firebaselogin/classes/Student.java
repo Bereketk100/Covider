@@ -1,7 +1,7 @@
 package com.example.firebaselogin.classes;
 
 import com.example.firebaselogin.enums.Role;
-
+//Ethan Zhang
 public class Student extends User {
     public Student() {
     }

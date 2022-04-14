@@ -30,6 +30,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 
+//mAuth: Bereket
+//Everything else: Ethan Zhang
 public class RegisterActivity extends AppCompatActivity {
     public static final String EMAIL_KEY = "email";
     public static final String NAME_KEY = "name";

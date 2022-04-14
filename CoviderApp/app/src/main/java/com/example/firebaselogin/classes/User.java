@@ -18,7 +18,7 @@ import com.google.firebase.firestore.CollectionReference;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
+//Ethan Zhang
 public abstract class User {
     protected int userID;
     protected String email;

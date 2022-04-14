@@ -25,6 +25,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 
+//Ethan Zhang
 public class ScheduleActivity extends AppCompatActivity {
     private Button btnHome, btnAddClass;
     private EditText classEditTxt, profEditTxt, sectionEditTxt, dptEditTxt;

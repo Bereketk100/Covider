@@ -42,7 +42,9 @@ import com.google.firebase.messaging.FirebaseMessaging;
 import static com.example.firebaselogin.activities.MainActivity.thisUser;
 import java.util.Date;
 
-@SuppressWarnings("ALL")
+//Ethan Zhang
+//messaging close contacts:Penelope
+//frontend: Bereket
 public class ProfileActivity extends AppCompatActivity {
     private AlertDialog.Builder dialogBuilder;
     private AlertDialog dialog;

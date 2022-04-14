@@ -49,7 +49,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-
+//Bereket
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
@@ -137,7 +137,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                         @Override
                         public void run() {
-
+                            //Ethan Zhang
                             createNewContactDialog();
                             btnChekIn.setOnClickListener(new View.OnClickListener() {
                                 @Override

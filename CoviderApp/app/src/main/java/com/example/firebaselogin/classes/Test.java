@@ -1,7 +1,7 @@
 package com.example.firebaselogin.classes;
 
 import java.util.Date;
-
+//Ethan Zhang
 public class Test {
     private Date date;
     private boolean result;

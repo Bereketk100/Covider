@@ -20,11 +20,17 @@ import com.example.firebaselogin.classes.Building;
 import com.example.firebaselogin.classes.Class;
 import com.example.firebaselogin.classes.Instructor;
 import com.example.firebaselogin.classes.Schedule;
+import com.example.firebaselogin.enums.Days;
 import com.example.firebaselogin.enums.InstructStatus;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.Source;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ScheduleActivity extends AppCompatActivity {
     private Button btnHome, btnAddClass;
@@ -68,16 +74,25 @@ public class ScheduleActivity extends AppCompatActivity {
         classRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                //ideally would query database to get the instructor and building objects, this is dummy
-                //objects for now
-                Instructor instructor = new Instructor();
-                Building b = new Building();
-                Class c = new Class("CSCI",instructor, b, InstructStatus.Hybrid, 1);
-                if (thisUser.getSchedule() == null){
-                    Schedule s = new Schedule();
-                    thisUser.setSchedule(s);
+                //get Days that the class is on
+                if (documentSnapshot == null){
+                    Toast.makeText(ScheduleActivity.this, "That class does not exist!", Toast.LENGTH_SHORT).show();
                 }
-                thisUser.getSchedule().addClass(c);
+                else{
+                    String hour = documentSnapshot.get("Hour").toString();
+                     List<Days> d = (List<Days>)documentSnapshot.get("Days");
+                    if (hour != null){
+                        Log.d("CLASS", hour.toString());
+                        Log.d("CLASS", d.toString());
+                    }
+                    else {
+                        Log.d("CLASS", "query failed");
+                    }
+
+                    if (thisUser.getSchedule() == null){
+                    }
+                }
+
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override

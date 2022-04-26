@@ -1,6 +1,7 @@
 package com.example.firebaselogin.classes;
 
 import static android.content.ContentValues.TAG;
+import static com.example.firebaselogin.activities.MainActivity.mUserDocRef;
 import static com.example.firebaselogin.activities.MainActivity.mUsers;
 
 import android.util.Log;
@@ -134,6 +135,24 @@ public abstract class User {
             testRecords = new ArrayList<>();
         }
         testRecords.add(test);
+        //if user tested positive, change status
+        if (test.isResult()){
+            mUserDocRef.update("status", Status.Infected).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void unused) {
+                    Log.d("UPDATE", "user status updated");
+                }
+            });
+        }
+        else {
+            mUserDocRef.update("status", Status.Healthy).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void unused) {
+                    Log.d("UPDATE", "user status updated");
+                }
+            });
+        }
+
     }
 
 

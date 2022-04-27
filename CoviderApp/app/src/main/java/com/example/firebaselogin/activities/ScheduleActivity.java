@@ -1,6 +1,7 @@
 package com.example.firebaselogin.activities;
 
 import static com.example.firebaselogin.activities.MainActivity.mFirestore;
+import static com.example.firebaselogin.activities.MainActivity.mUserDocRef;
 import static com.example.firebaselogin.activities.MainActivity.thisUser;
 import static java.lang.Integer.parseInt;
 
@@ -20,6 +21,7 @@ import com.example.firebaselogin.classes.Building;
 import com.example.firebaselogin.classes.Class;
 import com.example.firebaselogin.classes.Instructor;
 import com.example.firebaselogin.classes.Schedule;
+import com.example.firebaselogin.classes.User;
 import com.example.firebaselogin.enums.Days;
 import com.example.firebaselogin.enums.InstructStatus;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -30,7 +32,9 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.Source;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ScheduleActivity extends AppCompatActivity {
     private Button btnHome, btnAddClass;
@@ -80,16 +84,35 @@ public class ScheduleActivity extends AppCompatActivity {
                 }
                 else{
                     String hour = documentSnapshot.get("Hour").toString();
-                     List<Days> d = (List<Days>)documentSnapshot.get("Days");
+                    String minute = documentSnapshot.get("minute").toString();
+                    List<Days> d = (List<Days>)documentSnapshot.get("Days");
+                    InstructStatus is = instructStatusParser(documentSnapshot.get("InstructStatus").toString());
+                    Class c = new Class(dpt, classNum, profName, section, Integer.parseInt(hour), Integer.parseInt(minute), d);
                     if (hour != null){
-                        Log.d("CLASS", hour.toString());
+                        Log.d("CLASS", "hour: " + hour + ", minute: " + minute);
                         Log.d("CLASS", d.toString());
+                        Log.d("CLASS", is.toString());
+                        Log.d("CLASS", c.toString());
                     }
                     else {
                         Log.d("CLASS", "query failed");
                     }
-
-                    if (thisUser.getSchedule() == null){
+                    //update class
+                    Map<String, User> addedStudent = new HashMap<>();
+                    addedStudent.put(thisUser.getEmail(), thisUser);
+                    classRef.collection("students").add(addedStudent).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                        @Override
+                        public void onSuccess(DocumentReference documentReference) {
+                            Log.d("UDPATE", "student added to class list");
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.d("UPDATE", "failed to add student to list");
+                        }
+                    });
+                    if (thisUser.getSchedule() != null){
+                        thisUser.getSchedule().addClass(c);
                     }
                 }
 
@@ -102,6 +125,19 @@ public class ScheduleActivity extends AppCompatActivity {
             }
         });
     }
+    public InstructStatus instructStatusParser(String s){
+        if (s.equals("Hybrid"))
+            return InstructStatus.Hybrid;
+        else if (s.equals("Remote"))
+            return InstructStatus.Remote;
+        else if (s.equals("InPerson"))
+            return InstructStatus.InPerson;
+        return null;
+    }
+    public void updateStudents(Class c){
+
+    }
+
     public void home(){startActivity(new Intent(ScheduleActivity.this, MainActivity.class));}
 
 }

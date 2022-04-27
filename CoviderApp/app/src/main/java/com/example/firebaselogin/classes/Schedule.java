@@ -3,27 +3,32 @@ package com.example.firebaselogin.classes;
 import static android.content.ContentValues.TAG;
 import static com.example.firebaselogin.activities.MainActivity.mUserDocRef;
 import static com.example.firebaselogin.activities.MainActivity.mUsers;
+import static com.example.firebaselogin.activities.MainActivity.today;
 
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.example.firebaselogin.enums.Days;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.TreeMap;
 
 public class Schedule {
 
-
     private List<Class> schedule;
+    private TreeMap<Integer, Class> todaySchedule;
     public static String[] days = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
     //constructors
     public Schedule(){
         schedule = new ArrayList<>();
+        todaySchedule = new TreeMap<>();
     }
     //getters and setters
     public List<Class> getSchedule() {
@@ -38,7 +43,7 @@ public class Schedule {
         //adding Firestore document to user subcollection testRecords
         schedule.add(c);
         CollectionReference mSchedule = mUserDocRef.collection("schedule");
-        mSchedule.document("dummyClass").set(c).addOnSuccessListener(new OnSuccessListener<Void>() {
+        mSchedule.document(c.getDpt() + " "+ c.getClassNum()).set(c).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
                 Log.d("SCHEDULE", "Document has been saved!"); }
@@ -48,26 +53,45 @@ public class Schedule {
                 Log.w("SCHEDULE", "Document was not saved", e);
             }
         });
-
+        getTodaySchedule();
 
         schedule.add(c);
-        /*
 
-        scheduleCollection.document(c.getDpt()).collection(Integer.toString(c.getClassNum()))
-                .document(c.getInstructor().getLastName()).collection("sections").document(Integer.toString(c.getSection()));
-        scheduleCollection.document(c.getDpt()).set(c).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void unused) {
-                Log.d("SCHEDULE", "Added class");
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.d("SCHEDULE", "Failed to add class");
-            }
-        });*/
 
     }
+    public void getTodaySchedule(){
+        int todayNum = today.get(Calendar.DAY_OF_WEEK);
+
+        for (Class c : schedule){
+            for (Days d: c.getDays()){
+                //define thisDay after currentday obtained. Parse for hour/minute and sort
+                if (getDayNum(d) == todayNum){
+                    Log.d("DAY", c.getClassNum() + " added to today's schedule");
+                    todaySchedule.put(c.getHour(), c);
+                }
+                //if (d == thisDay);
+            }
+
+        }
+    }
+    private int getDayNum(Days d){
+        if (d == Days.Sunday)
+            return 1;
+        else if (d == Days.Monday)
+            return 2;
+        else if (d == Days.Tuesday)
+            return 3;
+        else if (d == Days.Wednesday)
+            return 4;
+        else if (d == Days.Thursday)
+            return 5;
+        else if (d == Days.Friday)
+            return 6;
+        else if (d == Days.Saturday)
+            return 7;
+        return 0;
+    }
+
 
 
 

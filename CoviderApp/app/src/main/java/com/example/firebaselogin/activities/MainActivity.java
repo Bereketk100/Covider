@@ -19,6 +19,8 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Calendar;
+
 public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
@@ -29,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     public static CollectionReference mUsers = mFirestore.collection("users");
     public static DocumentReference mUserDocRef;
     public static User thisUser;
+    public static Calendar today = Calendar.getInstance();
     public static int numUsers = 1;
     public static boolean healthAnswered;
 

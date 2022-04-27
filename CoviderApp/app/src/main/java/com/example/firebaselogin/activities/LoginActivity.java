@@ -99,7 +99,9 @@ public class LoginActivity extends AppCompatActivity {
                                 thisUser = student;
                             }
                         });
-                        startActivity(new Intent(LoginActivity.this , HealthFormActivity.class));
+                        //startActivity(new Intent(LoginActivity.this , HealthFormActivity.class));
+                        //to speed development
+                        startActivity(new Intent(LoginActivity.this , ScheduleActivity.class));
                     }
                     else
                     {

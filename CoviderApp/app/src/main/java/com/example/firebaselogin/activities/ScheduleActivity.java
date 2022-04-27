@@ -34,7 +34,10 @@ import com.google.firebase.firestore.Source;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+
+import kotlin.jvm.internal.ClassReference;
 
 public class ScheduleActivity extends AppCompatActivity {
     private Button btnHome, btnAddClass;
@@ -84,8 +87,11 @@ public class ScheduleActivity extends AppCompatActivity {
                 }
                 else{
                     String hour = documentSnapshot.get("Hour").toString();
-                    String minute = documentSnapshot.get("minute").toString();
-                    List<Days> d = (List<Days>)documentSnapshot.get("Days");
+                    String minute = documentSnapshot.get("Minute").toString();
+                    List<Days> d = daysParser((List<String>)documentSnapshot.get("Days"));
+                    for (Days day: d){
+                        Log.d("CLASS", "yes");
+                    }
                     InstructStatus is = instructStatusParser(documentSnapshot.get("InstructStatus").toString());
                     Class c = new Class(dpt, classNum, profName, section, Integer.parseInt(hour), Integer.parseInt(minute), d);
                     if (hour != null){
@@ -98,22 +104,7 @@ public class ScheduleActivity extends AppCompatActivity {
                         Log.d("CLASS", "query failed");
                     }
                     //update class
-                    Map<String, User> addedStudent = new HashMap<>();
-                    addedStudent.put(thisUser.getEmail(), thisUser);
-                    classRef.collection("students").add(addedStudent).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                        @Override
-                        public void onSuccess(DocumentReference documentReference) {
-                            Log.d("UDPATE", "student added to class list");
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Log.d("UPDATE", "failed to add student to list");
-                        }
-                    });
-                    if (thisUser.getSchedule() != null){
-                        thisUser.getSchedule().addClass(c);
-                    }
+                    updateStudents(classRef, c);
                 }
 
             }
@@ -126,6 +117,7 @@ public class ScheduleActivity extends AppCompatActivity {
         });
     }
     public InstructStatus instructStatusParser(String s){
+        Log.d("INSTRUCT", s);
         if (s.equals("Hybrid"))
             return InstructStatus.Hybrid;
         else if (s.equals("Remote"))
@@ -134,8 +126,59 @@ public class ScheduleActivity extends AppCompatActivity {
             return InstructStatus.InPerson;
         return null;
     }
-    public void updateStudents(Class c){
+    public List<Days> daysParser(List<String> list){
+        List<Days> result = new ArrayList<>();
+        for (String s: list) {
+            switch (s.toLowerCase(Locale.ROOT)) {
+                case "monday":
+                    result.add(Days.Monday);
+                    break;
+                case "tuesday":
+                    result.add(Days.Tuesday);
+                    break;
+                case "wednesday":
+                    result.add(Days.Wednesday);
+                    break;
+                case "thursday":
+                    result.add(Days.Thursday);
+                    break;
+                case "friday":
+                    result.add(Days.Friday);
+                    break;
+                case "saturday":
+                    result.add(Days.Saturday);
+                    break;
+                case "sunday":
+                    result.add(Days.Sunday);
+                    break;
+            }
+        }
+        return result;
+    }
 
+    public void updateStudents(DocumentReference classRef, Class c){
+        Map<String, User> addedStudent = new HashMap<>();
+        addedStudent.put(thisUser.getEmail(), thisUser);
+        classRef.collection("students").document(thisUser.getEmail()).set(thisUser).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                Log.d("UDPATE", "student added to class list");
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d("UPDATE", "failed to add student to list");
+            }
+        });
+        if (thisUser.getSchedule() != null){
+            Log.d("SCHEDULE", "Added class to schedule");
+            thisUser.getSchedule().addClass(c);
+        }
+        else {
+            Schedule s = new Schedule();
+            s.addClass(c);
+            thisUser.setSchedule(s);
+        }
     }
 
     public void home(){startActivity(new Intent(ScheduleActivity.this, MainActivity.class));}

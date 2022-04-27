@@ -135,6 +135,24 @@ public abstract class User {
             testRecords = new ArrayList<>();
         }
         testRecords.add(test);
+        //if user tested positive, change status
+        if (test.isResult()){
+            mUserDocRef.update("status", Status.Infected).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void unused) {
+                    Log.d("UPDATE", "user status updated");
+                }
+            });
+        }
+        else {
+            mUserDocRef.update("status", Status.Healthy).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void unused) {
+                    Log.d("UPDATE", "user status updated");
+                }
+            });
+        }
+
     }
     public void updateStatus(){
         mUserDocRef.update("status", status).addOnSuccessListener(new OnSuccessListener<Void>() {

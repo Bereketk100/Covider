@@ -18,8 +18,12 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+<<<<<<< HEAD
+//Ethan Zhang
+=======
 import java.util.TreeMap;
 
+>>>>>>> schedulingbranch
 public class Schedule {
 
     private List<Class> schedule;
@@ -64,8 +68,19 @@ public class Schedule {
         getTodaySchedule();
 
         schedule.add(c);
+<<<<<<< HEAD
+    }
+    public Class getClass(Class c){
+        for (Class search: schedule){
+            if (c == search){
+                return search;
+            }
+        }
+        return null;
+=======
 
 
+>>>>>>> schedulingbranch
     }
     public void getTodaySchedule(){
         int todayNum = today.get(Calendar.DAY_OF_WEEK);

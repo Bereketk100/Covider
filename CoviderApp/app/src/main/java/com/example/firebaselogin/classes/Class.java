@@ -7,44 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Class {
-    private int ID;
-    private int section;
 
-    private int classNum;
 
-    private String dpt;
-    private Days[] days;
-    private Instructor instructor;
-    private List<Student> students;
-    private Building building;
-    private InstructStatus instructStatus;
-
-    //constructors
-    public Class(){}
-    public Class(String dpt, Instructor instructor, Building building, InstructStatus instructStatus, int section){
-        this.dpt = dpt;
-        this.instructor = instructor;
-        this.building = building;
-        this.instructStatus = instructStatus;
-        this.section = section;
-
-        students = new ArrayList<>();
-    }
-    public int getID() {
-        return ID;
-    }
-
-    public void setID(int ID) {
-        this.ID = ID;
-    }
-
-    public int getClassNum() {
-        return classNum;
-    }
-
-    public void setClassNum(int classNum) {
-        this.classNum = classNum;
-    }
+    private String dpt, classNum, profName, sectionNum;
+    private int hour, minute;
+    private List<Days> days;
 
     public String getDpt() {
         return dpt;
@@ -54,48 +21,66 @@ public class Class {
         this.dpt = dpt;
     }
 
-    public int getSection() {
-        return section;
+    public String getClassNum() {
+        return classNum;
     }
 
-    public void setSection(int section) {
-        this.section = section;
+    public void setClassNum(String classNum) {
+        this.classNum = classNum;
     }
 
-    public Instructor getInstructor() {
-        return instructor;
+    public String getProfName() {
+        return profName;
     }
 
-    public void setInstructor(Instructor instructor) {
-        this.instructor = instructor;
+    public void setProfName(String profName) {
+        this.profName = profName;
     }
 
-    public List<Student> getStudents() {
-        return students;
+    public String getSectionNum() {
+        return sectionNum;
     }
 
-    public void setStudents(List<Student> students) {
-        this.students = students;
+    public void setSectionNum(String sectionNum) {
+        this.sectionNum = sectionNum;
     }
 
-    public Building getBuilding() {
-        return building;
+    public int getHour() {
+        return hour;
     }
 
-    public void setBuilding(Building building) {
-        this.building = building;
+    public void setHour(int hour) {
+        this.hour = hour;
     }
 
-    public InstructStatus getInstructStatus() {
-        return instructStatus;
+    public int getMinute() {
+        return minute;
     }
 
-    public void setInstructStatus(InstructStatus instructStatus) {
-        this.instructStatus = instructStatus;
+    public void setMinute(int minute) {
+        this.minute = minute;
     }
-    public void addStudent(Student student){
-        students.add(student);
+
+    public List<Days> getDays() {
+        return days;
     }
+
+    public void setDays(List<Days> days) {
+        this.days = days;
+    }
+    //constructors
+    public Class(){}
+    public Class(String dpt, String classNum, String profName, String sectionNum, int hour, int minute,
+        List<Days> days){
+        this.dpt = dpt;
+        this.classNum = classNum;
+        this.profName = profName;
+        this.sectionNum = sectionNum;
+        this.hour = hour;
+        this.minute = minute;
+        this.days = days;
+    }
+    //methods
 
 
 }

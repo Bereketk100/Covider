@@ -39,14 +39,6 @@ public class Schedule {
         this.schedule = schedule;
     }
     //class specific methods
-    public boolean classExists(Class c){
-        for (Class search: schedule){
-            if (c == search){
-                return true;
-            }
-        }
-        return false;
-    }
     public void addClass(Class c){
         //adding Firestore document to user subcollection testRecords
         schedule.add(c);
@@ -99,8 +91,6 @@ public class Schedule {
             return 7;
         return 0;
     }
-
-
 
 
 

@@ -139,6 +139,31 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         public void run() {
                             //Ethan Zhang
                             createNewContactDialog();
+                            CollectionReference buildingsRef = mFirestore.collection("buildings");
+                            btnViewRisk.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    //query for specific building
+                                    Log.d("RISK", "button clicked");
+                                    CollectionReference presentUsersRef = mFirestore.collection("buildings")
+                                            .document("BAB").collection("presentUsers");
+
+                                    presentUsersRef.whereEqualTo("status", "Infected").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                            if (task.isSuccessful()) {
+                                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                                    Log.d("RISK", document.getId() + " => " + document.getData());
+                                                }
+                                            } else {
+                                                Log.d("RISK", "Error getting documents: ", task.getException());
+                                            }
+                                        }
+                                    });
+
+
+                                }
+                            });
                             btnChekIn.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
@@ -150,7 +175,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                         Toast.makeText(MapsActivity.this, "Form Required!", Toast.LENGTH_SHORT).show();
                                         startActivity(new Intent(MapsActivity.this, BuildingQuestion.class));
                                     } else {
-                                        CollectionReference buildingsRef = mFirestore.collection("buildings");
                                         //query for specific building
                                         Query buildingQuery = buildingsRef.whereEqualTo("name", markerName);
                                         //execute query
@@ -188,12 +212,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                                 }
                             });
+                            /*
                             btnViewRisk.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
                                     createRiskPopup();
                                 }
-                            });
+                            });*/
 
 
                         }
@@ -245,6 +270,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         View rootView = activity.getWindow().getDecorView().findViewById(android.R.id.content);
         Snackbar.make(rootView, message, 1000).show();
     }
+
 
     public void fetchProf(){
         startActivity(new Intent(MapsActivity.this, ProfileActivity.class));

@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.firebaselogin.R;
 import com.example.firebaselogin.classes.Student;
+import com.example.firebaselogin.enums.Role;
 import com.example.firebaselogin.notifications.MessagingService;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -61,12 +62,10 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
-            }        });
-    }
+            }        });    }
 
     private void login()
     {
-        //Ethan Zhang
         String user = email.getText().toString().trim();
         String pass = password.getText().toString().trim();
         if(user.isEmpty())
@@ -83,6 +82,8 @@ public class LoginActivity extends AppCompatActivity {
                     {
                         //sets mUserDocRef and thisUser upon successful login
                         Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                        //log in debug
+                        Log.d("LOGIN", "Successful Login");
                         FirebaseMessaging.getInstance().subscribeToTopic("users")
                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
@@ -103,33 +104,15 @@ public class LoginActivity extends AppCompatActivity {
                                 thisUser = student;
                             }
                         });
-                        //startActivity(new Intent(LoginActivity.this , HealthFormActivity.class));
+
+                        startActivity(new Intent(LoginActivity.this , HealthFormActivity.class));
                         //to speed development
-                        startActivity(new Intent(LoginActivity.this , ScheduleActivity.class));
+                        //startActivity(new Intent(LoginActivity.this , ScheduleActivity.class));
                     }
                     else
                     {
-                        Toast.makeText(LoginActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
+                        Log.d("LOGIN", "Login failed");
+                        Toast.makeText(LoginActivity.this, "Login Failed"+task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }
-            });
-        }
-        FirebaseUser fbuser = FirebaseAuth.getInstance().getCurrentUser();
-        if(fbuser != null){
-            String uid = fbuser.getUid();
-            //subscribe them to topic under their user_id
-            FirebaseMessaging.getInstance().subscribeToTopic(uid)
-                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            String msg = "subscribed " + uid;
-                            if (!task.isSuccessful()) {
-                                msg = "failed to subscribe";
-                            }
-                            Log.d(TAG, msg);
-                            Toast.makeText(LoginActivity.this, msg, Toast.LENGTH_SHORT).show();
-                        }
-                    });
-        }
-    }
-}
+            });        }    } }

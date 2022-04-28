@@ -18,6 +18,7 @@ import static com.example.firebaselogin.activities.MainActivity.mUserDocRef;
 import static com.example.firebaselogin.activities.MainActivity.thisUser;
 
 import com.example.firebaselogin.R;
+import com.example.firebaselogin.enums.Role;
 import com.example.firebaselogin.enums.Status;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -253,7 +254,12 @@ public class HealthFormActivity extends AppCompatActivity {
         //checks if all symptoms were answered
         if (click1 && click2 && click3 && click4 && click5 && click6 && click7){
             healthAnswered = true;
-            startActivity(new Intent(HealthFormActivity.this, MainActivity.class));
+            if(thisUser.getRole().equals(Role.Instructor)) {
+                startActivity(new Intent(HealthFormActivity.this, InsMainActivity.class));
+
+            } else {
+                startActivity(new Intent(HealthFormActivity.this, MainActivity.class));
+            }
         }
         else {
             Toast.makeText(HealthFormActivity.this, "You have not answered one/more symptom checks", Toast.LENGTH_SHORT).show();

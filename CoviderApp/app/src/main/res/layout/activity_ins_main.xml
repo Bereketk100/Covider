@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.MainActivity">
+    tools:context=".activities.InsMainActivity">
 
     <ImageView
         android:id="@+id/imageView"
@@ -41,11 +41,11 @@
 
     <TextView
         android:id="@+id/text_welcome"
-        android:layout_width="337dp"
-        android:layout_height="100dp"
+        android:layout_width="273dp"
+        android:layout_height="92dp"
         android:layout_centerInParent="true"
         android:fontFamily="@font/alike"
-        android:text="Welcome to the Covider Home Page!"
+        android:text="Instructor Functionality"
         android:textAlignment="center"
 
         android:textColor="@color/black"
@@ -58,73 +58,93 @@
         app:layout_constraintVertical_bias="0.248" />
 
     <Button
-        android:id="@+id/map2"
-        android:layout_width="283dp"
-        android:layout_height="62dp"
+        android:id="@+id/classHistory"
+        android:layout_width="309dp"
+        android:layout_height="63dp"
+        android:layout_below="@id/text_welcome"
         android:backgroundTint="#B60001"
-        android:text="List of buildings"
+        android:text="View Class History"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.453"
+        app:layout_constraintHorizontal_bias="0.45"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.826" />
+        app:layout_constraintVertical_bias="0.42" />
 
     <Button
         android:id="@+id/btnprof"
-        android:layout_width="283dp"
-        android:layout_height="62dp"
+        android:layout_width="309dp"
+        android:layout_height="63dp"
         android:layout_below="@id/text_welcome"
         android:backgroundTint="#B60001"
         android:text="Profile Page"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.453"
+        app:layout_constraintHorizontal_bias="0.45"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.585" />
+        app:layout_constraintVertical_bias="0.658" />
 
     <Button
         android:id="@+id/map"
-        android:layout_width="283dp"
-        android:layout_height="62dp"
+        android:layout_width="309dp"
+        android:layout_height="63dp"
         android:layout_below="@id/text_welcome"
         android:backgroundTint="#B60001"
         android:text="Map"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.453"
+        app:layout_constraintHorizontal_bias="0.45"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.705" />
+        app:layout_constraintVertical_bias="0.776" />
 
     <Button
-        android:id="@+id/btnlogout"
-        android:layout_width="283dp"
-        android:layout_height="62dp"
-        android:layout_below="@+id/btnprof"
-        android:backgroundTint="#B60001"
-        android:text="Log Out"
-
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.453"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.929" />
-
-    <Button
-        android:id="@+id/btnSchedule"
-        android:layout_width="283dp"
-        android:layout_height="62dp"
+        android:id="@+id/map2"
+        android:layout_width="309dp"
+        android:layout_height="63dp"
         android:layout_below="@id/text_welcome"
         android:backgroundTint="#B60001"
-        android:text="Schedule"
+        android:text="List of Buildings"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.453"
+        app:layout_constraintHorizontal_bias="0.45"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.463" />
+        app:layout_constraintVertical_bias="0.886" />
+
+    <Button
+        android:id="@+id/btnlogout1"
+        android:layout_width="212dp"
+        android:layout_height="42dp"
+        android:layout_below="@id/text_welcome"
+        android:backgroundTint="#B60001"
+        android:text="Log out"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.976" />
+
+    <Button
+        android:id="@+id/classStatus"
+        android:layout_width="309dp"
+        android:layout_height="63dp"
+        android:layout_below="@id/text_welcome"
+        android:backgroundTint="#B60001"
+        android:text="Notify Students of Class Status"
+        android:textSize="13dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.45"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.535" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+

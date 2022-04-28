@@ -11,22 +11,20 @@ import com.example.firebaselogin.R;
 import com.example.firebaselogin.classes.Student;
 import com.example.firebaselogin.classes.User;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-//BackEnd: Ethan Zhang
-//FrontEnd:Bereket
 
 import java.util.Calendar;
 
-public class MainActivity extends AppCompatActivity {
+public class InsMainActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
-    private Button btnLogout, btnprof, btnMap, btnSchedule, btnList;
+    private Button btnLogout, btnprof, btnMap, btnList;
     private FirebaseAnalytics analytics = FirebaseAnalytics.getInstance(this);
 
     public static FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
@@ -41,9 +39,10 @@ public class MainActivity extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_ins_main);
         mAuth = FirebaseAuth.getInstance();
-        btnLogout = findViewById(R.id.btnlogout);
+        btnLogout = findViewById(R.id.btnlogout1);
+
         btnLogout.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -68,18 +67,12 @@ public class MainActivity extends AppCompatActivity {
                 displayMap();
             }
         });
-        btnSchedule = findViewById(R.id.btnSchedule);
-        btnSchedule.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                schedule();
-            }
-        });
+
         btnList = findViewById(R.id.map2);
         btnList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, ListActivity.class));
+                startActivity(new Intent(InsMainActivity.this, ListActivity.class));
             }
         });
     }
@@ -92,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser==null)
         {
-            startActivity(new Intent(MainActivity.this, LoginActivity.class));
+            startActivity(new Intent(InsMainActivity.this, LoginActivity.class));
 
         }
         else if (!healthAnswered) { //gets document snapshot of currentUser if someone is already logged in
@@ -106,21 +99,22 @@ public class MainActivity extends AppCompatActivity {
                     thisUser = student;
                 }
             });
-            startActivity(new Intent(MainActivity.this, HealthFormActivity.class));
+            startActivity(new Intent(InsMainActivity.this, HealthFormActivity.class));
         }
     }
 
     public void logout() {
         FirebaseAuth.getInstance().signOut();
-        startActivity(new Intent(MainActivity.this, LoginActivity.class));
+        startActivity(new Intent(InsMainActivity.this, LoginActivity.class));
     }
-    public void schedule(){startActivity(new Intent(MainActivity.this, ScheduleActivity.class));}
 
     public void fetchProf(){
-        startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+        startActivity(new Intent(InsMainActivity.this, ProfileActivity.class));
     }
 
+    public void schedule(){startActivity(new Intent(InsMainActivity.this, ScheduleActivity.class));}
+
     public void displayMap(){
-        startActivity(new Intent(MainActivity.this, MapsActivity.class));
+        startActivity(new Intent(InsMainActivity.this, MapsActivity.class));
     }
 }

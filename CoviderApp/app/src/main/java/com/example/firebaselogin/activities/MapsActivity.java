@@ -128,7 +128,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             public boolean onMarkerClick(Marker marker) {
                 // on marker click we are getting the title of our marker
                 // which is clicked and displaying it in a toast message.
-                if (thisUser.getStatus() == Status.Infected) {
+                if (thisUser.getStatus () != null && thisUser.getStatus() == Status.Infected) {
                     showSnackBar(MapsActivity.this, "You are Infected, please quarantine and schedule a test!");
                     //return false;
                 }
@@ -269,6 +269,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                         totalCount++;
                                     }
                                     Log.d("RISK", String.valueOf(totalCount));
+
                                 }
                             }
                         });
@@ -284,6 +285,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                     Log.d("RISK", String.valueOf(infectedCount));
                                     Log.d("RISK", "Risk Factor: "+ String.valueOf((float)infectedCount/(float)totalCount));
                                     rf = (float)infectedCount/(float)totalCount;
+                                    
+                                    Toast.makeText(MapsActivity.this, "Risk Factor is " + String.valueOf(rf), Toast.LENGTH_SHORT).show();
 
                                 } else {
                                     Log.d("RISK", "Error getting documents: ", task.getException());

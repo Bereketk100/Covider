@@ -26,7 +26,7 @@ import java.util.Calendar;
 public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
-    private Button btnLogout, btnprof, btnMap, btnSchedule, btnList;
+    private Button btnLogout, btnprof, btnMap, btnSchedule, btnList, btnInstruct;
     private FirebaseAnalytics analytics = FirebaseAnalytics.getInstance(this);
 
     public static FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
@@ -43,6 +43,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mAuth = FirebaseAuth.getInstance();
+
+        btnInstruct = findViewById(R.id.btnInstruct);
+        btnInstruct.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+
+            public void onClick(View v) {
+                instruct();
+            }
+
+        });
         btnLogout = findViewById(R.id.btnlogout);
         btnLogout.setOnClickListener(new View.OnClickListener() {
 
@@ -115,6 +126,8 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(MainActivity.this, LoginActivity.class));
     }
     public void schedule(){startActivity(new Intent(MainActivity.this, ScheduleActivity.class));}
+
+    public void instruct(){startActivity(new Intent(MainActivity.this, InsMainActivity.class));}
 
     public void fetchProf(){
         startActivity(new Intent(MainActivity.this, ProfileActivity.class));

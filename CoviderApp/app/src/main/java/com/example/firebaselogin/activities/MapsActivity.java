@@ -55,7 +55,7 @@ import java.util.Map;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private int totalCount = 0, infectedCount = 0;
-    private float rf;
+    private float rf; // risk factor
     private GoogleMap mMap;
     private ActivityMapsBinding binding;
     private HashMap<String, Integer> visited = new HashMap<String, Integer>();

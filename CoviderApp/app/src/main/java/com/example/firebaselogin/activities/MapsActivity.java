@@ -45,6 +45,8 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import org.w3c.dom.Document;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -52,6 +54,8 @@ import java.util.Map;
 //Bereket
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
+    private int totalCount = 0, infectedCount = 0;
+    private float rf;
     private GoogleMap mMap;
     private ActivityMapsBinding binding;
     private HashMap<String, Integer> visited = new HashMap<String, Integer>();
@@ -63,6 +67,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        rf = 0;
         super.onCreate(savedInstanceState);
 
         binding = ActivityMapsBinding.inflate(getLayoutInflater());
@@ -145,23 +150,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                 public void onClick(View view) {
                                     //query for specific building
                                     Log.d("RISK", "button clicked");
-                                    CollectionReference presentUsersRef = mFirestore.collection("buildings")
-                                            .document("BAB").collection("presentUsers");
-
-                                    presentUsersRef.whereEqualTo("status", "Infected").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                            if (task.isSuccessful()) {
-                                                for (QueryDocumentSnapshot document : task.getResult()) {
-                                                    Log.d("RISK", document.getId() + " => " + document.getData());
-                                                }
-                                            } else {
-                                                Log.d("RISK", "Error getting documents: ", task.getException());
-                                            }
-                                        }
-                                    });
-
-
+                                    //sets rf to the selected building
+                                    getRiskFactor(buildingsRef, markerName);
                                 }
                             });
                             btnChekIn.setOnClickListener(new View.OnClickListener() {
@@ -256,7 +246,58 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
+    public void getRiskFactor(CollectionReference buildingsRef, String markerName){
+        float ans = 0;
+        Query buildingQuery = buildingsRef.whereEqualTo("name", markerName);
 
+        buildingQuery.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Log.d("QUERY", document.getId() + " => " + document.getData());
+                        DocumentReference docRef = document.getReference();
+
+                        CollectionReference presentUsersRef = docRef.collection("presentUsers");
+                        presentUsersRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if (task.isSuccessful()){
+                                    //int totalCount = 0;
+                                    for (QueryDocumentSnapshot document : task.getResult()) {
+                                        Log.d("RISK", document.getId() + " => " + document.getData());
+                                        totalCount++;
+                                    }
+                                    Log.d("RISK", String.valueOf(totalCount));
+                                }
+                            }
+                        });
+                        presentUsersRef.whereEqualTo("status", "Infected").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    //int infectedCount = 0;
+                                    for (QueryDocumentSnapshot document : task.getResult()) {
+                                        Log.d("RISK", document.getId() + " => " + document.getData());
+                                        infectedCount++;
+                                    }
+                                    Log.d("RISK", String.valueOf(infectedCount));
+                                    Log.d("RISK", "Risk Factor: "+ String.valueOf((float)infectedCount/(float)totalCount));
+                                    rf = (float)infectedCount/(float)totalCount;
+
+                                } else {
+                                    Log.d("RISK", "Error getting documents: ", task.getException());
+                                }
+                            }
+                        });
+
+                    }
+                } else {
+                    Log.d("QUERY", "Error getting documents: ", task.getException());
+                }
+            }
+        });
+    }
     public void logout() {
         FirebaseAuth.getInstance().signOut();
         startActivity(new Intent(MapsActivity.this, LoginActivity.class));

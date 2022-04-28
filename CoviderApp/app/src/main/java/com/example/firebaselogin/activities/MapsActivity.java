@@ -285,7 +285,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                     Log.d("RISK", String.valueOf(infectedCount));
                                     Log.d("RISK", "Risk Factor: "+ String.valueOf((float)infectedCount/(float)totalCount));
                                     rf = (float)infectedCount/(float)totalCount;
-                                    
+
                                     Toast.makeText(MapsActivity.this, "Risk Factor is " + String.valueOf(rf), Toast.LENGTH_SHORT).show();
 
                                 } else {

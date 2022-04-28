@@ -23,24 +23,23 @@ import java.util.Calendar;
 
 public class InsMainActivity extends AppCompatActivity {
 
-    private FirebaseAuth mAuth;
+    //private FirebaseAuth mAuth;
     private Button btnLogout, btnprof, btnMap, btnList;
-    private FirebaseAnalytics analytics = FirebaseAnalytics.getInstance(this);
+    //private FirebaseAnalytics analytics = FirebaseAnalytics.getInstance(this);
 
-    public static FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
-    public static CollectionReference mUsers = mFirestore.collection("users");
-    public static DocumentReference mUserDocRef;
-    public static User thisUser;
-    public static Calendar today = Calendar.getInstance();
-    public static int numUsers = 1;
-    public static boolean healthAnswered;
+    //public static FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
+    //ublic static CollectionReference mUsers = mFirestore.collection("users");
+    //public static DocumentReference mUserDocRef;
+    //public static User thisUser;
+    //public static Calendar today = Calendar.getInstance();
+    //public static int numUsers = 1;
+    //public static boolean healthAnswered;
 
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ins_main);
-        mAuth = FirebaseAuth.getInstance();
         btnLogout = findViewById(R.id.btnlogout1);
 
         btnLogout.setOnClickListener(new View.OnClickListener() {
@@ -77,31 +76,6 @@ public class InsMainActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-
-    public void onStart(){
-
-        super.onStart();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser==null)
-        {
-            startActivity(new Intent(InsMainActivity.this, LoginActivity.class));
-
-        }
-        else if (!healthAnswered) { //gets document snapshot of currentUser if someone is already logged in
-            String emailTxt = mAuth.getCurrentUser().getEmail();
-
-            mUserDocRef = mUsers.document(emailTxt);
-            mUserDocRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                @Override
-                public void onSuccess(DocumentSnapshot documentSnapshot) {
-                    Student student = documentSnapshot.toObject(Student.class);
-                    thisUser = student;
-                }
-            });
-            startActivity(new Intent(InsMainActivity.this, HealthFormActivity.class));
-        }
-    }
 
     public void logout() {
         FirebaseAuth.getInstance().signOut();
